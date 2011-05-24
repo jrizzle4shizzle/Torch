@@ -2,21 +2,22 @@ package torch
 
 class Member {
 	
+	static hasMany = [committees: Committee]
+	
+	String login
+	String password
 	String firstName
 	String lastName
-	String userName
-	
-	
+	Boolean active
 	String homeAddressStreet
 	String homeAddressCity
 	String homeAddressState
 	String homeAddressZip
 	String homePhoneNumber
-	String mobinePhoneNumber
+	String mobilePhoneNumber
 	String notes
 	Rank rank
 	MembershipType membershipType
-	List<Committee> committees
 	String birthDay
 	Boolean aacoRidingDatabase
 	Integer badgeNumber
@@ -34,5 +35,38 @@ class Member {
 	
 	
     static constraints = {
+		login(unique:true)
+		password(password:true)
+		lastName()
+		firstName()
+		homeAddressStreet()
+		homeAddressCity()
+		homeAddressState()
+		homeAddressZip()
+		homePhoneNumber()
+		mobilePhoneNumber()
+		notes()
+		rank()
+		membershipType()
+		committees()
+		birthDay()
+		aacoRidingDatabase()
+		badgeNumber()
+		dues()
+		lifeInsurance()
+		ssn()
+		sex()
+		race()
+		driversLicenseNumber()
+		driversLicenseClass()
+		driversLicenseState()
+		driversLicenseExpiration()
+		active()
+		administrative()
+		membershipDate()
     }
+	
+	String toString(){
+		lastName + ", "+firstName
+	}
 }
