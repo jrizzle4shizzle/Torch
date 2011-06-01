@@ -1,14 +1,15 @@
 package torch
 
-class MemberController {
+class MemberController extends PrivateController{
 
     def scaffold = Member
 	
 	def login = {}
 	
-	def authenticate = {
+	def authenticate = {	
 		def user = Member.findByLoginAndPassword(params.login, params.password)
 		if(user){
+			println("successful login!")
 		  session.user = user
 		  flash.message = "Hello ${user.firstName} ${user.lastName}!"
 		  redirect(controller:"member", action:"list")

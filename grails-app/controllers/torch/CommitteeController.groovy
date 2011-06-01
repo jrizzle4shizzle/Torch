@@ -1,6 +1,6 @@
 package torch
 
-class CommitteeController {
+class CommitteeController extends PrivateController{
 
     def scaffold = Committee
 }
