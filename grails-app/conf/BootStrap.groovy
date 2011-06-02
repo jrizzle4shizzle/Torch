@@ -9,7 +9,8 @@ class BootStrap {
 				println("development")
 				def admin = new Member()
 				admin.setLogin("admin")
-				admin.setPassword("password")
+				String adminPass = "password"
+				admin.setPassword(adminPass.encodeAsHash())
 				admin.setFirstName("Administrator")
 				admin.setRole("admin")
 				
