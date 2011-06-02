@@ -12,6 +12,7 @@ class BootStrap {
 				String adminPass = "password"
 				admin.setPassword(adminPass.encodeAsHash())
 				admin.setFirstName("Administrator")
+				admin.setLastName("admin")
 				admin.setRole("admin")
 				
 				admin.save()
