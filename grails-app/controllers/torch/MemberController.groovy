@@ -15,6 +15,12 @@ class MemberController extends PrivateController{
     }
 
     def create = {
+		if( !(session?.user?.role == "admin") ){
+			flash.message = "You must be an administrator to perform that task."
+			redirect(action:"login")
+			return false
+		}
+		
         def memberInstance = new Member()
         memberInstance.properties = params
         return [memberInstance: memberInstance]
@@ -44,12 +50,20 @@ class MemberController extends PrivateController{
     }
 
     def edit = {
+		
         def memberInstance = Member.get(params.id)
         if (!memberInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'member.label', default: 'Member'), params.id])}"
             redirect(action: "list")
         }
         else {
+			//only you or an admin can edit your profile
+			if( !(session?.user?.role == "admin") && !(session?.user == memberInstance)){
+				flash.message = "You must be an administrator to perform that task."
+				redirect(action:"login")
+				return false
+			}
+			
             return [memberInstance: memberInstance]
         }
     }
@@ -57,6 +71,13 @@ class MemberController extends PrivateController{
     def update = {
         def memberInstance = Member.get(params.id)
         if (memberInstance) {
+			//only you or an admin can edit your profile
+			if( !(session?.user?.role == "admin") && !(session?.user == memberInstance)){
+				flash.message = "You must be an administrator to perform that task."
+				redirect(action:"login")
+				return false
+			}
+			
             if (params.version) {
                 def version = params.version.toLong()
                 if (memberInstance.version > version) {
@@ -83,6 +104,13 @@ class MemberController extends PrivateController{
     }
 
     def delete = {
+		//only admins can delete
+		if( !(session?.user?.role == "admin") ){
+			flash.message = "You must be an administrator to perform that task."
+			redirect(action:"login")
+			return false
+		}
+		
         def memberInstance = Member.get(params.id)
         if (memberInstance) {
             try {
