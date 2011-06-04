@@ -16,8 +16,16 @@ class BootStrap {
 				admin.setRole("admin")
 				
 				admin.save()
-				println("admin login="+admin.getLogin())
-				println("admin password="+admin.getPassword())
+				
+				def dipshit = new Member()
+				dipshit.setLogin("dipshit")
+				dipshit.setPassword(adminPass.encodeAsHash())
+				dipshit.setFirstName("Dip")
+				dipshit.setLastName("Shit")
+				dipshit.setRole("member")
+				
+				dipshit.save()
+				
 			break
 			
 			case "production":

@@ -24,27 +24,21 @@
                 <table>
                     <tbody>
                     
+                    	<g:if test="${session.user?.role == 'admin'}">
                         <tr class="prop">
                             <td valign="top" class="name"><g:message code="member.id.label" default="Id" /></td>
                             
                             <td valign="top" class="value">${fieldValue(bean: memberInstance, field: "id")}</td>
-                            
                         </tr>
-                    
+                        
                         <tr class="prop">
                             <td valign="top" class="name"><g:message code="member.login.label" default="Login" /></td>
                             
                             <td valign="top" class="value">${fieldValue(bean: memberInstance, field: "login")}</td>
                             
                         </tr>
-                    
-                        <tr class="prop">
-                            <td valign="top" class="name"><g:message code="member.password.label" default="Password" /></td>
-                            
-                            <td valign="top" class="value">${fieldValue(bean: memberInstance, field: "password")}</td>
-                            
-                        </tr>
-                    
+                        </g:if>
+                                        
                         <tr class="prop">
                             <td valign="top" class="name"><g:message code="member.lastName.label" default="Last Name" /></td>
                             
@@ -101,12 +95,14 @@
                             
                         </tr>
                     
+                    <g:if test="${session.user?.role == 'admin'}">
                         <tr class="prop">
                             <td valign="top" class="name"><g:message code="member.notes.label" default="Notes" /></td>
                             
                             <td valign="top" class="value">${fieldValue(bean: memberInstance, field: "notes")}</td>
                             
                         </tr>
+                    </g:if>
                     
                         <tr class="prop">
                             <td valign="top" class="name"><g:message code="member.rank.label" default="Rank" /></td>
@@ -155,7 +151,8 @@
                             <td valign="top" class="value">${fieldValue(bean: memberInstance, field: "badgeNumber")}</td>
                             
                         </tr>
-                    
+                        
+                    <g:if test="${session.user?.role == 'admin'}">
                         <tr class="prop">
                             <td valign="top" class="name"><g:message code="member.dues.label" default="Dues" /></td>
                             
@@ -190,7 +187,9 @@
                             <td valign="top" class="value">${fieldValue(bean: memberInstance, field: "race")}</td>
                             
                         </tr>
-                    
+                        </g:if>
+                        
+                    <g:if test="${session.user?.role == 'admin' || session.user.equals(memberInstance)}">
                         <tr class="prop">
                             <td valign="top" class="name"><g:message code="member.driversLicenseNumber.label" default="Drivers License Number" /></td>
                             
@@ -218,6 +217,7 @@
                             <td valign="top" class="value"><g:formatDate date="${memberInstance?.driversLicenseExpiration}" /></td>
                             
                         </tr>
+                    </g:if>
                     
                         <tr class="prop">
                             <td valign="top" class="name"><g:message code="member.active.label" default="Active" /></td>
@@ -239,25 +239,27 @@
                             <td valign="top" class="value"><g:formatDate date="${memberInstance?.membershipDate}" /></td>
                             
                         </tr>
+                        
+                        <g:if test="${session.user?.role == 'admin'}">
                     
                         <tr class="prop">
                             <td valign="top" class="name"><g:message code="member.role.label" default="Role" /></td>
                             
                             <td valign="top" class="value">${fieldValue(bean: memberInstance, field: "role")}</td>
-                            
                         </tr>
+                        </g:if>
                     
                     </tbody>
                 </table>
             </div>
             <g:if test="${session.user?.role == 'admin'}">
-            <div class="buttons">
-                <g:form>
-                    <g:hiddenField name="id" value="${memberInstance?.id}" />
-                    <span class="button"><g:actionSubmit class="edit" action="edit" value="${message(code: 'default.button.edit.label', default: 'Edit')}" /></span>
-                    <span class="button"><g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" /></span>
-                </g:form>
-            </div>
+	            <div class="buttons">
+	                <g:form>
+	                    <g:hiddenField name="id" value="${memberInstance?.id}" />
+	                    <span class="button"><g:actionSubmit class="edit" action="edit" value="${message(code: 'default.button.edit.label', default: 'Edit')}" /></span>
+	                    <span class="button"><g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" /></span>
+	                </g:form>
+	            </div>
             </g:if>
         </div>
     </body>
