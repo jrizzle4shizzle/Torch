@@ -26,6 +26,15 @@ class BootStrap {
 				
 				dipshit.save()
 				
+				def dipshit2 = new Member()
+				dipshit2.setLogin("dipshit2")
+				dipshit2.setPassword(adminPass.encodeAsHash())
+				dipshit2.setFirstName("Dip")
+				dipshit2.setLastName("Shit2")
+				dipshit2.setRole("member")
+				
+				dipshit2.save()
+				
 			break
 			
 			case "production":

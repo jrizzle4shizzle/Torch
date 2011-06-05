@@ -24,13 +24,7 @@
                 <table>
                     <tbody>
                     
-                    	<g:if test="${session.user?.role == 'admin'}">
-                        <tr class="prop">
-                            <td valign="top" class="name"><g:message code="member.id.label" default="Id" /></td>
-                            
-                            <td valign="top" class="value">${fieldValue(bean: memberInstance, field: "id")}</td>
-                        </tr>
-                        
+                    	<g:if test="${session?.memberPermission?.showLogin}">
                         <tr class="prop">
                             <td valign="top" class="name"><g:message code="member.login.label" default="Login" /></td>
                             
@@ -95,7 +89,7 @@
                             
                         </tr>
                     
-                    <g:if test="${session.user?.role == 'admin'}">
+                    <g:if test="${session?.memberPermission?.showNotes}">
                         <tr class="prop">
                             <td valign="top" class="name"><g:message code="member.notes.label" default="Notes" /></td>
                             
@@ -137,13 +131,14 @@
                             <td valign="top" class="value">${fieldValue(bean: memberInstance, field: "birthDay")}</td>
                             
                         </tr>
-                    
+                    <g:if test="${session?.memberPermission?.showRidingStatus}" }>
                         <tr class="prop">
                             <td valign="top" class="name"><g:message code="member.aacoRidingDatabase.label" default="Aaco Riding Database" /></td>
                             
                             <td valign="top" class="value"><g:formatBoolean boolean="${memberInstance?.aacoRidingDatabase}" /></td>
                             
                         </tr>
+                    </g:if>
                     
                         <tr class="prop">
                             <td valign="top" class="name"><g:message code="member.badgeNumber.label" default="Badge Number" /></td>
@@ -152,27 +147,33 @@
                             
                         </tr>
                         
-                    <g:if test="${session.user?.role == 'admin'}">
+                    <g:if test="${session?.memberPermission?.showDues}">
                         <tr class="prop">
                             <td valign="top" class="name"><g:message code="member.dues.label" default="Dues" /></td>
                             
                             <td valign="top" class="value"><g:formatBoolean boolean="${memberInstance?.dues}" /></td>
                             
                         </tr>
+                        
+                   </g:if>
                     
+                    <g:if test="${session?.memberPermission?.showLifeInsuranceStatus }">
                         <tr class="prop">
                             <td valign="top" class="name"><g:message code="member.lifeInsurance.label" default="Life Insurance" /></td>
                             
                             <td valign="top" class="value"><g:formatBoolean boolean="${memberInstance?.lifeInsurance}" /></td>
                             
                         </tr>
+                    </g:if>
                     
+                    <g:if test="${session?.memberPermission?.showSSN }">
                         <tr class="prop">
                             <td valign="top" class="name"><g:message code="member.ssn.label" default="Ssn" /></td>
                             
                             <td valign="top" class="value">${fieldValue(bean: memberInstance, field: "ssn")}</td>
                             
                         </tr>
+                    </g:if>
                     
                         <tr class="prop">
                             <td valign="top" class="name"><g:message code="member.sex.label" default="Sex" /></td>
@@ -187,9 +188,9 @@
                             <td valign="top" class="value">${fieldValue(bean: memberInstance, field: "race")}</td>
                             
                         </tr>
-                        </g:if>
                         
-                    <g:if test="${session.user?.role == 'admin' || session.user.equals(memberInstance)}">
+                        
+                    <g:if test="${session?.memberPermission?.showDriversLiscense}">
                         <tr class="prop">
                             <td valign="top" class="name"><g:message code="member.driversLicenseNumber.label" default="Drivers License Number" /></td>
                             
@@ -252,15 +253,19 @@
                     </tbody>
                 </table>
             </div>
-            <g:if test="${session.user?.role == 'admin'}">
+            
+            
 	            <div class="buttons">
 	                <g:form>
 	                    <g:hiddenField name="id" value="${memberInstance?.id}" />
-	                    <span class="button"><g:actionSubmit class="edit" action="edit" value="${message(code: 'default.button.edit.label', default: 'Edit')}" /></span>
-	                    <span class="button"><g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" /></span>
+	                    <g:if test="${session?.memberPermission?.canEdit}">
+	                    	<span class="button"><g:actionSubmit class="edit" action="edit" value="${message(code: 'default.button.edit.label', default: 'Edit')}" /></span>
+	                    </g:if>
+	                    <g:if test="${session?.memberPermission?.canDelete}">
+	                    	<span class="button"><g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" /></span>
+	                	</g:if>
 	                </g:form>
 	            </div>
-            </g:if>
         </div>
     </body>
 </html>
