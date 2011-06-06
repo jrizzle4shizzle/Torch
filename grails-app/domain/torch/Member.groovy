@@ -47,7 +47,6 @@ class Member {
 		notes(nullable:true)
 		rank(nullable:true)
 		membershipType(nullable:true)
-		committees(nullable:true)
 		birthDay(nullable:true)
 		aacoRidingDatabase(nullable:true)
 		badgeNumber(nullable:true)
