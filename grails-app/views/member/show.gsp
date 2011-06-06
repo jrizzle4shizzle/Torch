@@ -24,14 +24,14 @@
                 <table>
                     <tbody>
                     
-                    	<g:if test="${session?.memberPermission?.showLogin}">
+                    <g:if test="${session?.memberPermission?.showLogin}">
                         <tr class="prop">
                             <td valign="top" class="name"><g:message code="member.login.label" default="Login" /></td>
                             
                             <td valign="top" class="value">${fieldValue(bean: memberInstance, field: "login")}</td>
                             
                         </tr>
-                        </g:if>
+                     </g:if>
                                         
                         <tr class="prop">
                             <td valign="top" class="name"><g:message code="member.lastName.label" default="Last Name" /></td>
@@ -131,6 +131,7 @@
                             <td valign="top" class="value">${fieldValue(bean: memberInstance, field: "birthDay")}</td>
                             
                         </tr>
+                        
                     <g:if test="${session?.memberPermission?.showRidingStatus}" }>
                         <tr class="prop">
                             <td valign="top" class="name"><g:message code="member.aacoRidingDatabase.label" default="Aaco Riding Database" /></td>
@@ -175,6 +176,7 @@
                         </tr>
                     </g:if>
                     
+                    <g:if test="${session?.memberPermission?.showDemographics }">
                         <tr class="prop">
                             <td valign="top" class="name"><g:message code="member.sex.label" default="Sex" /></td>
                             
@@ -188,7 +190,7 @@
                             <td valign="top" class="value">${fieldValue(bean: memberInstance, field: "race")}</td>
                             
                         </tr>
-                        
+                    </g:if>
                         
                     <g:if test="${session?.memberPermission?.showDriversLiscense}">
                         <tr class="prop">
@@ -241,7 +243,7 @@
                             
                         </tr>
                         
-                        <g:if test="${session.user?.role == 'admin'}">
+                        <g:if test="${session?.memberPermission?.showRole}">
                     
                         <tr class="prop">
                             <td valign="top" class="name"><g:message code="member.role.label" default="Role" /></td>

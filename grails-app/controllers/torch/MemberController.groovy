@@ -20,7 +20,6 @@ class MemberController extends PrivateController{
 		//admin permissions
 		if (session?.user?.role == "admin"){
 			session?.memberPermission?.canCreateNew = true
-			session?.memberPermission?.canDelete = true
 		}
 		
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
@@ -67,9 +66,12 @@ class MemberController extends PrivateController{
 				session?.memberPermission?.showRidingStatus = true
 				session?.memberPermission?.showLifeInsuranceStatus = true
 				session?.memberPermission?.showSSN = true
-				session?.memberPermission?.canEdit = true
 				session?.memberPermission?.showDriversLiscense = true
+				session?.memberPermission?.showRole = true
+				
+				session?.memberPermission?.canEdit = true
 				session?.memberPermission?.canDelete = true
+				session?.memberPermission?.canCreateNew = true
 			}
 			
 			//set own profile permissions
@@ -103,9 +105,44 @@ class MemberController extends PrivateController{
 				return false
 			}
 			
-			//permission: canEditAdmin
-			if(session?.user?.role == "admin"){
-				session?.permissions?.canEditAdmin = true
+			//set admin permissions
+			if(session?.user?.role == 'admin'){
+				session?.memberPermission?.editLogin = true
+				session?.memberPermission?.editPassword = true
+				session?.memberPermission?.editName = true
+				session?.memberPermission?.editAddress = true
+				session?.memberPermission?.editPhoneNumbers = true
+				session?.memberPermission?.editNotes = true
+				session?.memberPermission?.editRank = true
+				session?.memberPermission?.editMembershipType = true
+				session?.memberPermission?.editCommittees = true
+				session?.memberPermission?.editBirthday = true
+				session?.memberPermission?.editBadgeNumber = true
+				session?.memberPermission?.editDues = true
+				session?.memberPermission?.editDemographics = true
+				session?.memberPermission?.editRidingStatus = true
+				session?.memberPermission?.editLifeInsuranceStatus = true
+				session?.memberPermission?.editSSN = true
+				session?.memberPermission?.editDriversLicense = true
+				session?.memberPermission?.editActive = true
+				session?.memberPermission?.editAdministrativeMember = true
+				session?.memberPermission?.editMembershipDate = true
+				session?.memberPermission?.editRole = true
+				
+				session?.memberPermission?.canEdit = true
+				session?.memberPermission?.canDelete = true
+				session?.memberPermission?.canCreateNew = true
+			}
+						
+			//set own profile permissions
+			if(session?.user.login == memberInstance.login){
+				session?.memberPermission?.editPassword = true
+				session?.memberPermission?.editName = true
+				session?.memberPermission?.editAddress = true
+				session?.memberPermission?.editPhoneNumbers = true
+				session?.memberPermission?.editBirthday = true
+				session?.memberPermission?.editDriversLicense = true
+				
 			}
 			
             return [memberInstance: memberInstance]
@@ -131,6 +168,7 @@ class MemberController extends PrivateController{
                     return
                 }
             }
+			//TODO: break this up
             memberInstance.properties = params
 			memberInstance.setPassword(params.password?.encodeAsHash())
             if (!memberInstance.hasErrors() && memberInstance.save(flush: true)) {

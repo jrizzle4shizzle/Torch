@@ -12,7 +12,9 @@
         <div class="nav">
             <span class="menuButton"><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></span>
             <span class="menuButton"><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></span>
-            <span class="menuButton"><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></span>
+            <g:if test="${session?.memberPermission?.canCreateNew}">
+            	<span class="menuButton"><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></span>
+        	</g:if>
         </div>
         <div class="body">
             <h1><g:message code="default.edit.label" args="[entityName]" /></h1>
@@ -31,6 +33,7 @@
                     <table>
                         <tbody>
                         
+                        <g:if test="${session?.memberPermission?.editLogin}">
                             <tr class="prop">
                                 <td valign="top" class="name">
                                   <label for="login"><g:message code="member.login.label" default="Login" /></label>
@@ -39,7 +42,9 @@
                                     <g:textField name="login" value="${memberInstance?.login}" />
                                 </td>
                             </tr>
+                         </g:if>
                         
+                        <g:if test="${session?.memberPermission?.editPassword }">
                             <tr class="prop">
                                 <td valign="top" class="name">
                                   <label for="password"><g:message code="member.password.label" default="Password" /></label>
@@ -48,7 +53,9 @@
                                     <g:passwordField name="password" value="${memberInstance?.password}" />
                                 </td>
                             </tr>
+                        </g:if>
                         
+                        <g:if test="${session?.memberPermission?.editName }">
                             <tr class="prop">
                                 <td valign="top" class="name">
                                   <label for="lastName"><g:message code="member.lastName.label" default="Last Name" /></label>
@@ -66,7 +73,9 @@
                                     <g:textField name="firstName" value="${memberInstance?.firstName}" />
                                 </td>
                             </tr>
+                        </g:if>
                         
+                        <g:if test="${session?.memberPermission?.editAddress }">
                             <tr class="prop">
                                 <td valign="top" class="name">
                                   <label for="homeAddressStreet"><g:message code="member.homeAddressStreet.label" default="Home Address Street" /></label>
@@ -102,7 +111,10 @@
                                     <g:textField name="homeAddressZip" value="${memberInstance?.homeAddressZip}" />
                                 </td>
                             </tr>
+                            
+                       </g:if>
                         
+                        <g:if test="${session?.memberPermission?.editPhoneNumbers }">
                             <tr class="prop">
                                 <td valign="top" class="name">
                                   <label for="homePhoneNumber"><g:message code="member.homePhoneNumber.label" default="Home Phone Number" /></label>
@@ -120,7 +132,9 @@
                                     <g:textField name="mobilePhoneNumber" value="${memberInstance?.mobilePhoneNumber}" />
                                 </td>
                             </tr>
+                        </g:if>
                         
+                        <g:if test="${session?.memberPermission?.editNotes }">
                             <tr class="prop">
                                 <td valign="top" class="name">
                                   <label for="notes"><g:message code="member.notes.label" default="Notes" /></label>
@@ -129,7 +143,9 @@
                                     <g:textField name="notes" value="${memberInstance?.notes}" />
                                 </td>
                             </tr>
+                        </g:if>
                         
+                        <g:if test="${session?.memberPermission?.editRank }">
                             <tr class="prop">
                                 <td valign="top" class="name">
                                   <label for="rank"><g:message code="member.rank.label" default="Rank" /></label>
@@ -138,7 +154,9 @@
                                     <g:select name="rank.id" from="${torch.Rank.list()}" optionKey="id" value="${memberInstance?.rank?.id}" noSelection="['null': '']" />
                                 </td>
                             </tr>
+                        </g:if>
                         
+                        <g:if test="${session?.memberPermission?.editMembershipType }">
                             <tr class="prop">
                                 <td valign="top" class="name">
                                   <label for="membershipType"><g:message code="member.membershipType.label" default="Membership Type" /></label>
@@ -147,7 +165,9 @@
                                     <g:select name="membershipType.id" from="${torch.MembershipType.list()}" optionKey="id" value="${memberInstance?.membershipType?.id}" noSelection="['null': '']" />
                                 </td>
                             </tr>
+                        </g:if>
                         
+                        <g:if test="${session?.memberPermission?.editCommittees }">
                             <tr class="prop">
                                 <td valign="top" class="name">
                                   <label for="committees"><g:message code="member.committees.label" default="Committees" /></label>
@@ -156,7 +176,9 @@
                                     <g:select name="committees" from="${torch.Committee.list()}" multiple="yes" optionKey="id" size="5" value="${memberInstance?.committees*.id}" />
                                 </td>
                             </tr>
+                        </g:if>
                         
+                        <g:if test="${session?.memberPermission?.editBirthday }">
                             <tr class="prop">
                                 <td valign="top" class="name">
                                   <label for="birthDay"><g:message code="member.birthDay.label" default="Birth Day" /></label>
@@ -164,8 +186,10 @@
                                 <td valign="top" class="value ${hasErrors(bean: memberInstance, field: 'birthDay', 'errors')}">
                                     <g:textField name="birthDay" value="${memberInstance?.birthDay}" />
                                 </td>
-                            </tr>
+                            </tr>    
+                        </g:if>
                         
+                        <g:if test="${session?.memberPermission?.editRidingStatus }">
                             <tr class="prop">
                                 <td valign="top" class="name">
                                   <label for="aacoRidingDatabase"><g:message code="member.aacoRidingDatabase.label" default="Aaco Riding Database" /></label>
@@ -174,7 +198,9 @@
                                     <g:checkBox name="aacoRidingDatabase" value="${memberInstance?.aacoRidingDatabase}" />
                                 </td>
                             </tr>
+                        </g:if>
                         
+                        <g:if test="${session?.memberPermission?.editBadgeNumber }">
                             <tr class="prop">
                                 <td valign="top" class="name">
                                   <label for="badgeNumber"><g:message code="member.badgeNumber.label" default="Badge Number" /></label>
@@ -183,7 +209,9 @@
                                     <g:textField name="badgeNumber" value="${fieldValue(bean: memberInstance, field: 'badgeNumber')}" />
                                 </td>
                             </tr>
+                        </g:if>
                         
+                        <g:if test="${session?.memberPermission?.editDues }">
                             <tr class="prop">
                                 <td valign="top" class="name">
                                   <label for="dues"><g:message code="member.dues.label" default="Dues" /></label>
@@ -192,7 +220,9 @@
                                     <g:checkBox name="dues" value="${memberInstance?.dues}" />
                                 </td>
                             </tr>
+                        </g:if>
                         
+                        <g:if test="${session?.memberPermission?.editLifeInsurance }">
                             <tr class="prop">
                                 <td valign="top" class="name">
                                   <label for="lifeInsurance"><g:message code="member.lifeInsurance.label" default="Life Insurance" /></label>
@@ -201,7 +231,9 @@
                                     <g:checkBox name="lifeInsurance" value="${memberInstance?.lifeInsurance}" />
                                 </td>
                             </tr>
+                        </g:if>
                         
+                        <g:if test="${session?.memberPermission?.editSSN }">
                             <tr class="prop">
                                 <td valign="top" class="name">
                                   <label for="ssn"><g:message code="member.ssn.label" default="Ssn" /></label>
@@ -210,7 +242,9 @@
                                     <g:textField name="ssn" value="${memberInstance?.ssn}" />
                                 </td>
                             </tr>
+                        </g:if>
                         
+                        <g:if test="${session?.memberPermission?.editDemographics }">
                             <tr class="prop">
                                 <td valign="top" class="name">
                                   <label for="sex"><g:message code="member.sex.label" default="Sex" /></label>
@@ -228,7 +262,9 @@
                                     <g:textField name="race" value="${memberInstance?.race}" />
                                 </td>
                             </tr>
+                        </g:if>
                         
+                        <g:if test="${session?.memberPermission?.editDriversLicense }">
                             <tr class="prop">
                                 <td valign="top" class="name">
                                   <label for="driversLicenseNumber"><g:message code="member.driversLicenseNumber.label" default="Drivers License Number" /></label>
@@ -264,7 +300,9 @@
                                     <g:datePicker name="driversLicenseExpiration" precision="day" value="${memberInstance?.driversLicenseExpiration}" default="none" noSelection="['': '']" />
                                 </td>
                             </tr>
+                        </g:if>
                         
+                        <g:if test="${session?.memberPermission?.editActive }">
                             <tr class="prop">
                                 <td valign="top" class="name">
                                   <label for="active"><g:message code="member.active.label" default="Active" /></label>
@@ -273,7 +311,9 @@
                                     <g:checkBox name="active" value="${memberInstance?.active}" />
                                 </td>
                             </tr>
+                        </g:if>
                         
+                        <g:if test="${session?.memberPermission?.editAdministrativeMember }">
                             <tr class="prop">
                                 <td valign="top" class="name">
                                   <label for="administrative"><g:message code="member.administrative.label" default="Administrative" /></label>
@@ -282,7 +322,9 @@
                                     <g:checkBox name="administrative" value="${memberInstance?.administrative}" />
                                 </td>
                             </tr>
+                        </g:if>
                         
+                        <g:if test="${session?.memberPermission?.editMembershipDate }">
                             <tr class="prop">
                                 <td valign="top" class="name">
                                   <label for="membershipDate"><g:message code="member.membershipDate.label" default="Membership Date" /></label>
@@ -291,7 +333,9 @@
                                     <g:datePicker name="membershipDate" precision="day" value="${memberInstance?.membershipDate}" default="none" noSelection="['': '']" />
                                 </td>
                             </tr>
+                        </g:if>
                         
+                        <g:if test="${session?.memberPermission?.editRole }">
                             <tr class="prop">
                                 <td valign="top" class="name">
                                   <label for="role"><g:message code="member.role.label" default="Role" /></label>
@@ -300,13 +344,16 @@
                                     <g:select name="role" from="${memberInstance.constraints.role.inList}" value="${memberInstance?.role}" valueMessagePrefix="member.role"  />
                                 </td>
                             </tr>
+                        </g:if>
                         
                         </tbody>
                     </table>
                 </div>
                 <div class="buttons">
                     <span class="button"><g:actionSubmit class="save" action="update" value="${message(code: 'default.button.update.label', default: 'Update')}" /></span>
-                    <span class="button"><g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" /></span>
+                    <g:if test="${session?.memberPermission?.canDelete}">
+                    	<span class="button"><g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" /></span>
+                	</g:if>
                 </div>
             </g:form>
         </div>
