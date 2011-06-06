@@ -112,18 +112,6 @@
                             
                         </tr>
                     
-                        <tr class="prop">
-                            <td valign="top" class="name"><g:message code="member.committees.label" default="Committees" /></td>
-                            
-                            <td valign="top" style="text-align: left;" class="value">
-                                <ul>
-                                <g:each in="${memberInstance.committees}" var="c">
-                                    <li><g:link controller="committee" action="show" id="${c.id}">${c?.encodeAsHTML()}</g:link></li>
-                                </g:each>
-                                </ul>
-                            </td>
-                            
-                        </tr>
                     
                         <tr class="prop">
                             <td valign="top" class="name"><g:message code="member.birthDay.label" default="Birth Day" /></td>

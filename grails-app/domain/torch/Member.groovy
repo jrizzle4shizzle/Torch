@@ -2,8 +2,6 @@ package torch
 
 class Member {
 	
-	static hasMany = [committees: Committee]
-	
 	String login
 	String password
 	String firstName
