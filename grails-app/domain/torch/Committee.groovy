@@ -1,11 +1,17 @@
 package torch
 
 class Committee {
-
-	String name
 	
+	static hasMany = [members:Member]
+	
+	String name
+	Member chair
+	
+		
     static constraints = {
-		name()
+		name(unique:true)
+		chair()
+		members()
     }
 	
 	String toString(){
