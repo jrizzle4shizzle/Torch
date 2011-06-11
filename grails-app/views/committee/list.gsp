@@ -10,7 +10,9 @@
     <body>
         <div class="nav">
             <span class="menuButton"><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></span>
-            <span class="menuButton"><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></span>
+            <g:if test="${session?.committeePermission?.canCreateNew}">
+            	<span class="menuButton"><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></span>
+        	</g:if>
         </div>
         <div class="body">
             <h1><g:message code="default.list.label" args="[entityName]" /></h1>
@@ -21,9 +23,7 @@
                 <table>
                     <thead>
                         <tr>
-                        
-                            <g:sortableColumn property="id" title="${message(code: 'committee.id.label', default: 'Id')}" />
-                        
+                                                
                             <g:sortableColumn property="name" title="${message(code: 'committee.name.label', default: 'Name')}" />
                         
                             <th><g:message code="committee.chair.label" default="Chair" /></th>
@@ -34,10 +34,8 @@
                     <g:each in="${committeeInstanceList}" status="i" var="committeeInstance">
                         <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
                         
-                            <td><g:link action="show" id="${committeeInstance.id}">${fieldValue(bean: committeeInstance, field: "id")}</g:link></td>
-                        
-                            <td>${fieldValue(bean: committeeInstance, field: "name")}</td>
-                        
+                            <td><g:link action="show" id="${committeeInstance.id}">${fieldValue(bean: committeeInstance, field: "name")}</g:link></td>
+                                                
                             <td>${fieldValue(bean: committeeInstance, field: "chair")}</td>
                         
                         </tr>

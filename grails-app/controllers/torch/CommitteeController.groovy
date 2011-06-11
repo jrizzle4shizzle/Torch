@@ -16,6 +16,12 @@ class CommitteeController {
     }
 
     def list = {
+		//admin permissions
+		if (session?.user?.role == "admin"){
+			session?.committeePermission?.canCreateNew = true
+		}
+		
+		
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
         [committeeInstanceList: Committee.list(params), committeeInstanceTotal: Committee.count()]
     }
@@ -23,8 +29,9 @@ class CommitteeController {
     def create = {
 		
 		//allows
-		if(!session?.user?.role == 'admin'){
+		if(!(session?.user?.role == 'admin')){
 			flash.message = "You don't have permission to do that!"
+			redirect(controller:'member', action:"login")
 			return false
 		}
 		
@@ -35,14 +42,16 @@ class CommitteeController {
     }
 
     def save = {
+		def committeeInstance = new Committee(params)
 		
 		//allows
-		if(!session?.user?.role == 'admin'){
+		if(!(session?.user?.role == 'admin')){
 			flash.message = "You don't have permission to do that!"
+			redirect(controller:'member', action:"login")
 			return false
 		}
 		
-        def committeeInstance = new Committee(params)
+        
         if (committeeInstance.save(flush: true)) {
             flash.message = "${message(code: 'default.created.message', args: [message(code: 'committee.label', default: 'Committee'), committeeInstance.id])}"
             redirect(action: "show", id: committeeInstance.id)
@@ -59,6 +68,18 @@ class CommitteeController {
             redirect(action: "list")
         }
         else {
+			//set admin permissions
+			if(session?.user?.role == 'admin'){
+				session?.committeePermission?.canEdit = true
+				session?.committeePermission?.canDelete = true
+				session?.committeePermission?.canCreateNew = true
+			}
+			
+			//set chairman permissions
+			if(session?.user?.login == committeeInstance.chair?.login){
+				session?.committeePermission?.canEdit = true
+			}
+			
             [committeeInstance: committeeInstance]
         }
     }
@@ -70,6 +91,19 @@ class CommitteeController {
             redirect(action: "list")
         }
         else {
+			//set admin permissions
+			if(session?.user?.role == 'admin'){
+				session?.committeePermission?.canEdit = true
+				session?.committeePermission?.canDelete = true
+				session?.committeePermission?.canCreateNew = true
+			}
+			
+			//set chairman permissions
+			if(session?.user?.login == committeeInstance.chair?.login){
+				session?.committeePermission?.canEdit = true
+			}
+			
+			
             return [committeeInstance: committeeInstance]
         }
     }

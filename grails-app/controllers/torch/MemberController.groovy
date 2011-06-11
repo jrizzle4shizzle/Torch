@@ -39,7 +39,13 @@ class MemberController extends PrivateController{
     }
 
     def save = {
-        def memberInstance = new Member(params)
+		if( !(session?.user?.role == "admin") ){
+			flash.message = "You must be an administrator to perform that task."
+			redirect(action:"login")
+			return false
+		}
+		
+		def memberInstance = new Member(params)
 		memberInstance.setPassword(params.password?.encodeAsHash())
         if (memberInstance.save(flush: true)) {
             flash.message = "${message(code: 'default.created.message', args: [message(code: 'member.label', default: 'Member'), memberInstance.id])}"
@@ -223,7 +229,8 @@ class MemberController extends PrivateController{
 			session.user = user
 			session.permission = perms
 			flash.message = "Hello ${user.firstName} ${user.lastName}!"
-			redirect(controller:"member", action:"list")
+			//redirect(controller:"member", action:"list")
+			redirect(uri:"/")
 		}else{
 		  flash.message = "Sorry, ${params.login}. Please try again."
 		  redirect(action:"login")
