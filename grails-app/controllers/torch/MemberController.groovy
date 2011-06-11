@@ -159,7 +159,7 @@ class MemberController extends PrivateController{
         def memberInstance = Member.get(params.id)
         if (memberInstance) {
 			//only you or an admin can edit your profile
-			if( !(session?.user?.role == "admin") && !(session?.user == memberInstance)){
+			if( !(session?.user?.role == "admin") && !(session?.user?.login == memberInstance.login)){
 				flash.message = "You must be an administrator to perform that task."
 				redirect(action:"login")
 				return false

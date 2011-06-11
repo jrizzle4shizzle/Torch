@@ -167,16 +167,6 @@
                             </tr>
                         </g:if>
                         
-                        <g:if test="${session?.memberPermission?.editCommittees }">
-                            <tr class="prop">
-                                <td valign="top" class="name">
-                                  <label for="committees"><g:message code="member.committees.label" default="Committees" /></label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean: memberInstance, field: 'committees', 'errors')}">
-                                    <g:select name="committees" from="${torch.Committee.list()}" multiple="yes" optionKey="id" size="5" value="${memberInstance?.committees*.id}" />
-                                </td>
-                            </tr>
-                        </g:if>
                         
                         <g:if test="${session?.memberPermission?.editBirthday }">
                             <tr class="prop">
