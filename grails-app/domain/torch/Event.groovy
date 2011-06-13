@@ -1,16 +1,18 @@
 package torch
 
 class Event {
-
-	static hasMany = [rsvp:Member, attended:Member]
+	static hasMany = [attendees:Member]
+	
 	String name
 	Date date
-	
+	String type
+	Member pointOfContact
 	
     static constraints = {
 		name(unique:true)
-		date
-		rsvp
-		attended
+		date()
+		attendees()
+		pointOfContact()
+		type(inList:["drill", "meeting"])
     }
 }
