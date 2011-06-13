@@ -28,8 +28,8 @@ class MemberController extends PrivateController{
 
     def create = {
 		if( !(session?.user?.role == "admin") ){
-			flash.message = "You must be an administrator to perform that task."
-			redirect(action:"login")
+			flash.message = "You don't have permission to do that."
+			redirect(uri:"/")
 			return false
 		}
 		
@@ -40,8 +40,8 @@ class MemberController extends PrivateController{
 
     def save = {
 		if( !(session?.user?.role == "admin") ){
-			flash.message = "You must be an administrator to perform that task."
-			redirect(action:"login")
+			flash.message = "You don't have permission to do that."
+			redirect(uri:"/")
 			return false
 		}
 		
@@ -106,8 +106,8 @@ class MemberController extends PrivateController{
         else {
 			//only you or an admin can edit your profile
 			if( !(session?.user?.role == "admin") && !(session?.user?.login == memberInstance.login)){
-				flash.message = "You must be an administrator to perform that task."
-				redirect(action:"login")
+				flash.message = "You don't have permission to do that."
+				redirect(uri:"/")
 				return false
 			}
 			
@@ -160,8 +160,8 @@ class MemberController extends PrivateController{
         if (memberInstance) {
 			//only you or an admin can edit your profile
 			if( !(session?.user?.role == "admin") && !(session?.user?.login == memberInstance.login)){
-				flash.message = "You must be an administrator to perform that task."
-				redirect(action:"login")
+				flash.message = "You don't have permission to do that."
+				redirect(uri:"/")
 				return false
 			}
 			
@@ -194,8 +194,8 @@ class MemberController extends PrivateController{
     def delete = {
 		//only admins can delete
 		if( !(session?.user?.role == "admin") ){
-			flash.message = "You must be an administrator to perform that task."
-			redirect(action:"login")
+			flash.message = "You don't have permission to do that."
+			redirect(uri:"/")
 			return false
 		}
 		

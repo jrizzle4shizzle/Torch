@@ -30,8 +30,8 @@ class CommitteeController {
 		
 		//allows
 		if(!(session?.user?.role == 'admin')){
-			flash.message = "You don't have permission to do that!"
-			redirect(controller:'member', action:"login")
+			flash.message = "You don't have permission to do that."
+			redirect(uri:"/")
 			return false
 		}
 		
@@ -46,8 +46,8 @@ class CommitteeController {
 		
 		//allows
 		if(!(session?.user?.role == 'admin')){
-			flash.message = "You don't have permission to do that!"
-			redirect(controller:'member', action:"login")
+			flash.message = "You don't have permission to do that."
+			redirect(uri:"/")
 			return false
 		}
 		
