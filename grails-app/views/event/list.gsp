@@ -10,7 +10,11 @@
     <body>
         <div class="nav">
             <span class="menuButton"><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></span>
-            <span class="menuButton"><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></span>
+        	
+        	<g:if test="${session?.eventPermission.canCreateNew }">    
+            	<span class="menuButton"><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></span>
+        	</g:if>
+        
         </div>
         <div class="body">
             <h1><g:message code="default.list.label" args="[entityName]" /></h1>
@@ -21,9 +25,7 @@
                 <table>
                     <thead>
                         <tr>
-                        
-                            <g:sortableColumn property="id" title="${message(code: 'event.id.label', default: 'Id')}" />
-                        
+                                                
                             <g:sortableColumn property="name" title="${message(code: 'event.name.label', default: 'Name')}" />
                         
                             <g:sortableColumn property="date" title="${message(code: 'event.date.label', default: 'Date')}" />
@@ -38,10 +40,8 @@
                     <g:each in="${eventInstanceList}" status="i" var="eventInstance">
                         <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
                         
-                            <td><g:link action="show" id="${eventInstance.id}">${fieldValue(bean: eventInstance, field: "id")}</g:link></td>
-                        
-                            <td>${fieldValue(bean: eventInstance, field: "name")}</td>
-                        
+                            <td><g:link action="show" id="${eventInstance.id}">${fieldValue(bean: eventInstance, field: "name")}</g:link></td>
+                                                
                             <td><g:formatDate date="${eventInstance.date}" /></td>
                         
                             <td>${fieldValue(bean: eventInstance, field: "pointOfContact")}</td>
