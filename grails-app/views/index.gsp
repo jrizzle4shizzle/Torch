@@ -57,8 +57,9 @@
                 <div class="panelBody">
                     <h1>Navigation</h1>
                     <ul>
+                    	<li><a href="member">Member</a></li>
                         <li><a href="committee">Committees</a></li>
-                        <li><a href="member">Member</a></li>
+                        <li><a href="event">Events</a></li>
                     </ul>
                     <h1>List of controllers for dev purposes:</h1>
 	                <ul>

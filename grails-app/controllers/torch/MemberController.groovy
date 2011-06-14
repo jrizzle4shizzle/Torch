@@ -134,6 +134,7 @@ class MemberController extends PrivateController{
 				session?.memberPermission?.editAdministrativeMember = true
 				session?.memberPermission?.editMembershipDate = true
 				session?.memberPermission?.editRole = true
+				session?.memberPermission?.editAdministrativeTitle = true
 				
 				session?.memberPermission?.canEdit = true
 				session?.memberPermission?.canDelete = true
