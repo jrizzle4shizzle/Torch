@@ -61,12 +61,24 @@
                         <li><a href="committee">Committees</a></li>
                         <li><a href="event">Events</a></li>
                     </ul>
+                    <g:if test="${session?.user?.role == 'admin'}">
+                    	<h1>Admin Menu</h1>
+                    	<ul>
+                    		<li><a href="administrativeTitle">Administrative Titles</a></li>
+                    		<li><a href="membershipType">Membership Types</a></li>
+                    		<li><a href="rank">Ranks</a></li>
+                    	</ul>
+                    </g:if>
+                    
+                    <g:if env="development">
                     <h1>List of controllers for dev purposes:</h1>
 	                <ul>
 	                    <g:each var="c" in="${grailsApplication.controllerClasses.sort { it.fullName } }">
 	                        <li class="controller"><g:link controller="${c.logicalPropertyName}">${c.fullName}</g:link></li>
 	                    </g:each>
 	                </ul>
+	                </g:if>
+	                
                 </div>
                 <div class="panelBtm"></div>
             </div>
