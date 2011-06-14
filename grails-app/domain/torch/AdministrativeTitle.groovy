@@ -7,4 +7,8 @@ class AdministrativeTitle {
     static constraints = {
 		name(unique:true)
     }
+	
+	String toString(){
+		name
+	}
 }
