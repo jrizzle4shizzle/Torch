@@ -40,6 +40,15 @@
                                 </td>
                             </tr>
                         
+                            <tr class="prop">
+                                <td valign="top" class="name">
+                                  <label for="sitePermissions"><g:message code="administrativeTitle.sitePermissions.label" default="Site Permissions" /></label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(bean: administrativeTitleInstance, field: 'sitePermissions', 'errors')}">
+                                    <g:select name="sitePermissions" from="${administrativeTitleInstance.permissions}" multiple="yes" size="5" value="${administrativeTitleInstance?.sitePermissions}" valueMessagePrefix="administrativeTitle.sitePermissions"  />
+                                </td>
+                            </tr>
+                        
                         </tbody>
                     </table>
                 </div>

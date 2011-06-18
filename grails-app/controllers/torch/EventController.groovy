@@ -16,8 +16,14 @@ class EventController {
     }
 
     def list = {
+		def user = session.user
+		user.refresh()
 		//permissions:
-		if (session?.user?.role == "admin"){
+		if (user?.role == "admin"){
+			session?.eventPermission?.canCreateNew = true
+		}
+		
+		if(user?.administrativeTitle?.sitePermissions?.contains("event.create")){
 			session?.eventPermission?.canCreateNew = true
 		}
 		

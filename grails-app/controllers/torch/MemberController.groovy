@@ -176,8 +176,12 @@ class MemberController extends PrivateController{
                 }
             }
 			//TODO: break this up
+			def oldPasswordHash = memberInstance.password
             memberInstance.properties = params
-			memberInstance.setPassword(params.password?.encodeAsHash())
+			def newPassword = params.password
+			if(oldPasswordHash != newPassword){
+				memberInstance.setPassword(newPassword?.encodeAsHash())
+			}
             if (!memberInstance.hasErrors() && memberInstance.save(flush: true)) {
                 flash.message = "${message(code: 'default.updated.message', args: [message(code: 'member.label', default: 'Member'), memberInstance.id])}"
                 redirect(action: "show", id: memberInstance.id)
