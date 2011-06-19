@@ -15,4 +15,6 @@ class Event {
 		pointOfContact()
 		type(inList:["drill", "meeting"])
     }
+	
+	
 }

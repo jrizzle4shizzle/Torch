@@ -1,8 +1,14 @@
 package torch
 
-class EventController {
+import java.util.List;
+
+
+class EventController{
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
+	
+	static permissions = ["event.all", "event.create", "event.delete"];
+	
 	
 	def beforeInterceptor = [action:this.&clearPermissions]
 	
@@ -17,13 +23,15 @@ class EventController {
 
     def list = {
 		def user = session.user
-		user.refresh()
+		//user.refresh()
 		//permissions:
 		if (user?.role == "admin"){
 			session?.eventPermission?.canCreateNew = true
 		}
 		
-		if(user?.administrativeTitle?.sitePermissions?.contains("event.create")){
+		def userPermissions = SitePermissions.getPermissionsForUser(user)
+		
+		if(userPermissions?.contains("event.create")){
 			session?.eventPermission?.canCreateNew = true
 		}
 		

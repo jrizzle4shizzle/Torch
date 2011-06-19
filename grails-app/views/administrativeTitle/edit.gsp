@@ -1,6 +1,7 @@
 
 
 <%@ page import="torch.AdministrativeTitle" %>
+<%@page import="torch.SitePermissions" %> 
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -45,7 +46,7 @@
                                   <label for="sitePermissions"><g:message code="administrativeTitle.sitePermissions.label" default="Site Permissions" /></label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: administrativeTitleInstance, field: 'sitePermissions', 'errors')}">
-                                    <g:select name="sitePermissions" from="${administrativeTitleInstance.permissions}" multiple="yes" size="5" value="${administrativeTitleInstance?.sitePermissions}" valueMessagePrefix="administrativeTitle.sitePermissions"  />
+                                    <g:select name="sitePermissions" from="${SitePermissions.permissions}" multiple="yes" size="5" value="${administrativeTitleInstance?.sitePermissions}" valueMessagePrefix="administrativeTitle.sitePermissions"  />
                                 </td>
                             </tr>
                         

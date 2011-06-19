@@ -5,8 +5,6 @@ class AdministrativeTitle {
 	
 	String name
 	
-	static permissions = ["event.all", "event.create", "event.delete"];
-	
     static constraints = {
 		name(unique:true)
 		sitePermissions()
