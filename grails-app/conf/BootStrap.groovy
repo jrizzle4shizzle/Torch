@@ -11,26 +11,26 @@ class BootStrap {
 				admin.setLogin("admin")
 				String adminPass = "password"
 				admin.setPassword(adminPass.encodeAsHash())
-				admin.setFirstName("Administrator")
-				admin.setLastName("admin")
+				admin.setFirstName("Admin")
+				admin.setLastName("istrator")
 				admin.setRole("admin")
 				
 				admin.save()
 				
 				def dipshit = new Member()
-				dipshit.setLogin("dipshit")
+				dipshit.setLogin("user")
 				dipshit.setPassword(adminPass.encodeAsHash())
-				dipshit.setFirstName("Dip")
-				dipshit.setLastName("Shit")
+				dipshit.setFirstName("User")
+				dipshit.setLastName("Alpha")
 				dipshit.setRole("member")
 				
 				dipshit.save()
 				
 				def dipshit2 = new Member()
-				dipshit2.setLogin("dipshit2")
+				dipshit2.setLogin("user2")
 				dipshit2.setPassword(adminPass.encodeAsHash())
-				dipshit2.setFirstName("Dip")
-				dipshit2.setLastName("Shit2")
+				dipshit2.setFirstName("User")
+				dipshit2.setLastName("Bravo")
 				dipshit2.setRole("member")
 				
 				dipshit2.save()
