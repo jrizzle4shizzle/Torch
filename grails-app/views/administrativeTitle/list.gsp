@@ -21,9 +21,7 @@
                 <table>
                     <thead>
                         <tr>
-                        
-                            <g:sortableColumn property="id" title="${message(code: 'administrativeTitle.id.label', default: 'Id')}" />
-                        
+                                                
                             <g:sortableColumn property="name" title="${message(code: 'administrativeTitle.name.label', default: 'Name')}" />
                         
                         </tr>
@@ -32,10 +30,8 @@
                     <g:each in="${administrativeTitleInstanceList}" status="i" var="administrativeTitleInstance">
                         <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
                         
-                            <td><g:link action="show" id="${administrativeTitleInstance.id}">${fieldValue(bean: administrativeTitleInstance, field: "id")}</g:link></td>
-                        
-                            <td>${fieldValue(bean: administrativeTitleInstance, field: "name")}</td>
-                        
+                            <td><g:link action="show" id="${administrativeTitleInstance.id}">${fieldValue(bean: administrativeTitleInstance, field: "name")}</g:link></td>
+                                                
                         </tr>
                     </g:each>
                     </tbody>
