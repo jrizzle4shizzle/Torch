@@ -4,6 +4,8 @@ class AdministrativeTitleController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 	
+	static permissions = ["administrativeTitle.all"]
+	
 	def beforeInterceptor = [action:this.&clearPermissions]
 	
 	def clearPermissions(){

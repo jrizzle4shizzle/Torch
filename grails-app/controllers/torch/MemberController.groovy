@@ -4,6 +4,8 @@ class MemberController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]	
 	
+	static permissions = ["member.all"]
+	
 	def beforeInterceptor = [action:this.&clearPermissions]
 	
 	def clearPermissions(){

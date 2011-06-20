@@ -4,6 +4,8 @@ class CommitteeController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
+	static permissions = ["committee.all"]
+	
 	def beforeInterceptor = [action:this.&clearPermissions]
 	
 	def clearPermissions(){
