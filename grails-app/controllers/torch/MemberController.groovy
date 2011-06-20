@@ -1,6 +1,6 @@
 package torch
 
-class MemberController extends PrivateController{
+class MemberController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]	
 	

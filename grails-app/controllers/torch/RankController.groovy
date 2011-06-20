@@ -1,6 +1,6 @@
 package torch
 
-class RankController extends PrivateController{
+class RankController {
 
     def scaffold = Rank
 }

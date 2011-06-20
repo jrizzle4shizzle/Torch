@@ -1,6 +1,6 @@
 package torch
 
-class MembershipTypeController extends PrivateController{
+class MembershipTypeController {
 
     def scaffold = MembershipType
 }
