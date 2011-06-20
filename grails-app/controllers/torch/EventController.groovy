@@ -7,10 +7,77 @@ class EventController{
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 	
-	static permissions = ["event.all", "event.create", "event.delete"];
+	static permissions = ["event.all-all", 
+		"event.meeting-all", "event.meeting-create", "event.meeting-delete", "event.meeting-update",
+		"event.drill-all", "event.drill-create", "event.drill-delete", "event.drill-update",
+		"event.fundraiser-all", "event.fundraiser-create", "event.fundraiser-delete", "event.drill-update"
+		];
 	
 	
 	def beforeInterceptor = [action:this.&clearPermissions]
+	
+	boolean canCreate(Member user){
+		if(session?.user?.role == "admin"){
+			return true
+		}
+		
+		def userPermissions = SitePermissions.getPermissionsForUser(user)
+		
+		return (userPermissions?.contains("event.all-all") ||
+			userPermissions?.contains("event.meeting-all") || userPermissions?.contains("event.meeting-create") ||
+			userPermissions?.contains("event.drill-all") || userPermissions?.contains("event.drill-create") ||
+			userPermissions?.contains("event.fundraiser-all") || userPermissions?.contains("event.fundraiser-create"))
+	}
+	
+	boolean canUpdate(Member user, String type){
+		if(session?.user?.role == "admin"){
+			return true
+		}
+		
+		def userPermissions = SitePermissions.getPermissionsForUser(user)
+		
+		if(userPermissions.contains("event.all-all")){
+			return true;
+		}
+		
+		switch(type){
+			case "meeting":
+				return (userPermissions.contains("event.meeting-all") || userPermissions.contains("event.meeting-update"))
+				break;
+			case "drill":
+				return (userPermissions.contains("event.drill-all") || userPermissions.contains("event.drill-update"))
+				break;
+			case "fundraiser":
+				return (userPermissions.contains("event.fundraiser-all") || userPermissions.contains("event.fundraiser-update"))
+				break;
+		}
+		return false;
+	}
+	
+	boolean canDelete(Member user, String type){
+		if(session?.user?.role == "admin"){
+			return true
+		}
+		
+		def userPermissions = SitePermissions.getPermissionsForUser(user)
+		
+		if(userPermissions.contains("event.all-all")){
+			return true;
+		}
+		
+		switch(type){
+			case "meeting":
+				return (userPermissions.contains("event.meeting-all") || userPermissions.contains("event.meeting-delete"))
+				break;
+			case "drill":
+				return (userPermissions.contains("event.drill-all") || userPermissions.contains("event.drill-delete"))
+				break;
+			case "fundraiser":
+				return (userPermissions.contains("event.fundraiser-all") || userPermissions.contains("event.fundraiser-delete"))
+				break;
+		}
+		return false;
+	}
 	
 	def clearPermissions(){
 		def perms = [:]
@@ -23,15 +90,9 @@ class EventController{
 
     def list = {
 		def user = session.user
-		//user.refresh()
+		
 		//permissions:
-		if (user?.role == "admin"){
-			session?.eventPermission?.canCreateNew = true
-		}
-		
-		def userPermissions = SitePermissions.getPermissionsForUser(user)
-		
-		if(userPermissions?.contains("event.create")){
+		if (canCreate(user)){
 			session?.eventPermission?.canCreateNew = true
 		}
 		
@@ -42,7 +103,7 @@ class EventController{
 
     def create = {
 		//permission check
-		if( !(session?.user?.role == "admin") ){
+		if( !(canCreate(session?.user))){
 			flash.message = "You don't have permission to do that."
 			redirect(uri:"/")
 			return false
@@ -52,10 +113,10 @@ class EventController{
         eventInstance.properties = params
         return [eventInstance: eventInstance]
     }
-
+	
     def save = {
 		//permission check
-		if( !(session?.user?.role == "admin") ){
+		if( !(canCreate(session?.user))){
 			flash.message = "You don't have permission to do that."
 			redirect(uri:"/")
 			return false
@@ -79,9 +140,14 @@ class EventController{
         }
         else {
 			//set permissions
-			if(session?.user?.role == 'admin'){
+			if(canUpdate(session?.user, eventInstance.type)){
 				session?.eventPermission?.canEdit = true
+			}
+			if(canDelete(session?.user, eventInstance.type)){
 				session?.eventPermission?.canDelete = true
+			}
+			
+			if(canCreate(session?.user)){
 				session?.eventPermission?.canCreateNew = true
 			}
             [eventInstance: eventInstance]
@@ -102,10 +168,15 @@ class EventController{
 				return false
 			}
 			
-			//set addl permissions
-			if(session?.user?.role == 'admin'){
+			//set permissions
+			if(canUpdate(session?.user, eventInstance.type)){
 				session?.eventPermission?.canEdit = true
+			}
+			if(canDelete(session?.user, eventInstance.type)){
 				session?.eventPermission?.canDelete = true
+			}
+			
+			if(canCreate(session?.user)){
 				session?.eventPermission?.canCreateNew = true
 			}
 			
@@ -113,11 +184,12 @@ class EventController{
         }
     }
 
+	
     def update = {
         def eventInstance = Event.get(params.id)
         if (eventInstance) {
 			//permissions check
-			if( !(session?.user?.role == "admin") ){
+			if( !(canUpdate(session?.user, eventInstance?.type))){
 				flash.message = "You don't have permission to do that."
 				redirect(uri:"/")
 				return false
@@ -146,17 +218,20 @@ class EventController{
             redirect(action: "list")
         }
     }
+	
+	
 
     def delete = {
-		//permissions check
-		if( !(session?.user?.role == "admin") ){
-			flash.message = "You don't have permission to do that."
-			redirect(uri:"/")
-			return false
-		}
+		def eventInstance = Event.get(params.id)
 		
-        def eventInstance = Event.get(params.id)
         if (eventInstance) {
+			//permissions check
+			if( !(canDelete(session?.user, eventInstance?.type) )){
+				flash.message = "You don't have permission to do that."
+				redirect(uri:"/")
+				return false
+			}
+			
             try {
                 eventInstance.delete(flush: true)
                 flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'event.label', default: 'Event'), params.id])}"

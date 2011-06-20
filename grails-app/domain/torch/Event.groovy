@@ -13,7 +13,7 @@ class Event {
 		date()
 		attendees()
 		pointOfContact()
-		type(inList:["drill", "meeting"])
+		type(inList:["drill", "meeting", "fundraiser"])
     }
 	
 	
