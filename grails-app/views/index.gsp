@@ -68,6 +68,7 @@
                     		<li><a href="administrativeTitle">Administrative Titles</a></li>
                     		<li><a href="membershipType">Membership Types</a></li>
                     		<li><a href="rank">Ranks</a></li>
+                    		
                     	</ul>
                     </g:if>
                     
