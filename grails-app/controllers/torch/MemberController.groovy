@@ -4,9 +4,39 @@ class MemberController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]	
 	
-	static permissions = ["member.all"]
+	static permissions = ["member.all", "member.create", "member.update", "member.delete"]
 	
 	def beforeInterceptor = [action:this.&clearPermissions]
+	
+	boolean canCreate(Member user){
+		if(session?.user?.role == "admin"){
+			return true
+		}
+		
+		def userPermissions = SitePermissions.getPermissionsForUser(user)
+		
+		return(userPermissions?.contains("member.create"))
+	}
+	
+	boolean canUpdate(Member user){
+		if(session?.user?.role == "admin"){
+			return true
+		}
+		
+		def userPermissions = SitePermissions.getPermissionsForUser(user)
+		
+		return(userPermissions?.contains("member.update"))
+	}
+	
+	boolean canDelete(Member user){
+		if(session?.user?.role == "admin"){
+			return true
+		}
+		
+		def userPermissions = SitePermissions.getPermissionsForUser(user)
+		
+		return(userPermissions?.contains("member.delete"))
+	}
 	
 	def clearPermissions(){
 		def perms = [:]
@@ -20,7 +50,7 @@ class MemberController {
 
     def list = {
 		//admin permissions
-		if (session?.user?.role == "admin"){
+		if (canCreate(session?.user)){
 			session?.memberPermission?.canCreateNew = true
 		}
 		
@@ -29,7 +59,7 @@ class MemberController {
     }
 
     def create = {
-		if( !(session?.user?.role == "admin") ){
+		if( !(canCreate(session?.user)) ){
 			flash.message = "You don't have permission to do that."
 			redirect(uri:"/")
 			return false
@@ -41,7 +71,7 @@ class MemberController {
     }
 
     def save = {
-		if( !(session?.user?.role == "admin") ){
+		if( !(canCreate(session?.user)) ){
 			flash.message = "You don't have permission to do that."
 			redirect(uri:"/")
 			return false
@@ -107,7 +137,7 @@ class MemberController {
         }
         else {
 			//only you or an admin can edit your profile
-			if( !(session?.user?.role == "admin") && !(session?.user?.login == memberInstance.login)){
+			if( !(canUpdate(session?.user)) && !(session?.user?.login == memberInstance.login)){
 				flash.message = "You don't have permission to do that."
 				redirect(uri:"/")
 				return false
@@ -162,7 +192,7 @@ class MemberController {
         def memberInstance = Member.get(params.id)
         if (memberInstance) {
 			//only you or an admin can edit your profile
-			if( !(session?.user?.role == "admin") && !(session?.user?.login == memberInstance.login)){
+			if( !(canUpdate(session?.user)) && !(session?.user?.login == memberInstance.login)){
 				flash.message = "You don't have permission to do that."
 				redirect(uri:"/")
 				return false
@@ -199,8 +229,8 @@ class MemberController {
     }
 
     def delete = {
-		//only admins can delete
-		if( !(session?.user?.role == "admin") ){
+		//check delete permissions
+		if( !(canDelete(session?.user)) ){
 			flash.message = "You don't have permission to do that."
 			redirect(uri:"/")
 			return false
