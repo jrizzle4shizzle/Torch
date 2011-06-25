@@ -5,6 +5,7 @@ class BootStrap {
 
     def init = { servletContext ->
 		switch(GrailsUtil.environment){
+			
 			case "development":
 				println("development")
 				def admin = new Member()
@@ -14,26 +15,29 @@ class BootStrap {
 				admin.setFirstName("Admin")
 				admin.setLastName("istrator")
 				admin.setRole("admin")
+				admin.setActive(true)
 				
 				admin.save()
 				
-				def dipshit = new Member()
-				dipshit.setLogin("user")
-				dipshit.setPassword(adminPass.encodeAsHash())
-				dipshit.setFirstName("User")
-				dipshit.setLastName("Alpha")
-				dipshit.setRole("member")
+				def user = new Member()
+				user.setLogin("user")
+				user.setPassword(adminPass.encodeAsHash())
+				user.setFirstName("User")
+				user.setLastName("Alpha")
+				user.setRole("member")
+				user.setActive true
 				
-				dipshit.save()
+				user.save()
 				
-				def dipshit2 = new Member()
-				dipshit2.setLogin("user2")
-				dipshit2.setPassword(adminPass.encodeAsHash())
-				dipshit2.setFirstName("User")
-				dipshit2.setLastName("Bravo")
-				dipshit2.setRole("member")
+				def user2 = new Member()
+				user2.setLogin("user2")
+				user2.setPassword(adminPass.encodeAsHash())
+				user2.setFirstName("User")
+				user2.setLastName("Bravo")
+				user2.setRole("member")
+				user2.setActive true
 				
-				dipshit2.save()
+				user2.save()
 				
 			break
 			

@@ -50,7 +50,7 @@ class CommitteeController {
     def list = {
 		//permissions
 		if(canCreate(session?.user)){
-				session?.RankPermission?.canCreateNew = true
+			session?.committeePermission?.canCreateNew = true
 		}
 		
 		
@@ -102,14 +102,14 @@ class CommitteeController {
         else {
 			//set permissions
 			if(canUpdate(session?.user)){
-				session?.RankPermission?.canEdit = true
+				session?.committeePermission?.canEdit = true
 			}
 			if(canDelete(session?.user)){
-				session?.RankPermission?.canDelete = true
+				session?.committeePermission?.canDelete = true
 			}
 			
 			if(canCreate(session?.user)){
-				session?.RankPermission?.canCreateNew = true
+				session?.committeePermission?.canCreateNew = true
 			}
 			
 			//set chairman permissions
@@ -137,15 +137,15 @@ class CommitteeController {
 			
 			//set permissions
 			if(canUpdate(session?.user)){
-				session?.RankPermission?.canEdit = true
+				session?.committeePermission?.canEdit = true
 			}
 			
 			if(canDelete(session?.user)){
-				session?.RankPermission?.canDelete = true
+				session?.committeePermission?.canDelete = true
 			}
 			
 			if(canCreate(session?.user)){
-				session?.RankPermission?.canCreateNew = true
+				session?.committeePermission?.canCreateNew = true
 			}
 			
 			//set chairman permissions
@@ -153,8 +153,10 @@ class CommitteeController {
 				session?.committeePermission?.canEdit = true
 			}
 			
+			//get list of active members
+			def activeMembers = Member.findAllByActive(true)
 			
-            return [committeeInstance: committeeInstance]
+            return [committeeInstance: committeeInstance, members: activeMembers]
         }
     }
 

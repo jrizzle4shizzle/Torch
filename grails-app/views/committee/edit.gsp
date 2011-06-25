@@ -56,7 +56,7 @@
                                   <label for="members"><g:message code="committee.members.label" default="Members" /></label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: committeeInstance, field: 'members', 'errors')}">
-                                    <g:select name="members" from="${torch.Member.list()}" multiple="yes" optionKey="id" size="5" value="${committeeInstance?.members*.id}" />
+                                    <g:select name="members" from="${members}" multiple="yes" optionKey="id" size="5" value="${committeeInstance?.members*.id}" />
                                 </td>
                             </tr>
                         
