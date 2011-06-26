@@ -39,6 +39,16 @@ class BootStrap {
 				
 				user2.save()
 				
+				def user3 = new Member()
+				user3.setLogin("user3")
+				user3.setPassword(adminPass.encodeAsHash())
+				user3.setFirstName("User")
+				user3.setLastName("Bravo")
+				user3.setRole("member")
+				user3.setActive false
+				
+				user3.save()
+				
 			break
 			
 			case "production":

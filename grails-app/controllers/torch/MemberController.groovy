@@ -258,7 +258,7 @@ class MemberController {
 	
 	def authenticate = {
 		def user = Member.findByLoginAndPassword(params.login, params.password.encodeAsHash())
-		if(user){
+		if(user && user.active){
 			println("successful login!")
 			
 			def perms = [:]
