@@ -25,13 +25,6 @@
                     <tbody>
                     
                         <tr class="prop">
-                            <td valign="top" class="name"><g:message code="committee.id.label" default="Id" /></td>
-                            
-                            <td valign="top" class="value">${fieldValue(bean: committeeInstance, field: "id")}</td>
-                            
-                        </tr>
-                    
-                        <tr class="prop">
                             <td valign="top" class="name"><g:message code="committee.name.label" default="Name" /></td>
                             
                             <td valign="top" class="value">${fieldValue(bean: committeeInstance, field: "name")}</td>

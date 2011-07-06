@@ -26,13 +26,6 @@
                     <tbody>
                     
                         <tr class="prop">
-                            <td valign="top" class="name"><g:message code="event.id.label" default="Id" /></td>
-                            
-                            <td valign="top" class="value">${fieldValue(bean: eventInstance, field: "id")}</td>
-                            
-                        </tr>
-                    
-                        <tr class="prop">
                             <td valign="top" class="name"><g:message code="event.name.label" default="Name" /></td>
                             
                             <td valign="top" class="value">${fieldValue(bean: eventInstance, field: "name")}</td>
