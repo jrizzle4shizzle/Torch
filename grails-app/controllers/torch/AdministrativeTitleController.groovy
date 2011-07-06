@@ -22,6 +22,7 @@ class AdministrativeTitleController {
 		if (session?.user?.role == "admin"){
 			session?.adminTitlePermission?.canCreateNew = true
 		}
+		
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
         [administrativeTitleInstanceList: AdministrativeTitle.list(params), administrativeTitleInstanceTotal: AdministrativeTitle.count()]
     }

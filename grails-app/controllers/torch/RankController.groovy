@@ -48,6 +48,10 @@ class RankController {
     }
 
     def list = {
+		if(canCreate(session?.user)){
+			session?.RankPermission?.canCreateNew = true
+		}
+		
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
         [rankInstanceList: Rank.list(params), rankInstanceTotal: Rank.count()]
     }

@@ -48,6 +48,10 @@ class MembershipTypeController {
     }
 
     def list = {
+		if(canCreate(session?.user)){
+			session?.MembershipTypePermission?.canCreateNew = true
+		}
+		
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
         [membershipTypeInstanceList: MembershipType.list(params), membershipTypeInstanceTotal: MembershipType.count()]
     }
@@ -124,6 +128,7 @@ class MembershipTypeController {
 			if(canUpdate(session?.user)){
 				session?.MembershipTypePermission?.canEdit = true
 			}
+			
 			if(canDelete(session?.user)){
 				session?.MembershipTypePermission?.canDelete = true
 			}
