@@ -1,1 +1,5 @@
 ***TORCH***
+Built with Grails
+
+GETTING STARTED
+$ grails dev run-app
