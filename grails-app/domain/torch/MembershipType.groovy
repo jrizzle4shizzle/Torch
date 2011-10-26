@@ -1,5 +1,6 @@
 package torch
 
+@Deprecated
 class MembershipType {
 	static hasMany = [sitePermissions:String]
 	

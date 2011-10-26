@@ -30,7 +30,7 @@ class Member {
 	Date driversLicenseExpiration
 	Boolean administrative
 	Date membershipDate
-	AdministrativeTitle administrativeTitle
+	//AdministrativeTitle administrativeTitle
 	String role = "member"
 	
 	
@@ -63,7 +63,7 @@ class Member {
 		active(nullable:true)
 		administrative(nullable:true)
 		membershipDate(nullable:true)
-		administrativeTitle(nullable:true)
+		//administrativeTitle(nullable:true)
 		role(inList:["member", "admin"])
     }
 	

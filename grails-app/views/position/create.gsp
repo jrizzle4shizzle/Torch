@@ -1,11 +1,11 @@
 
 
-<%@ page import="torch.Rank" %>
+<%@ page import="torch.Position" %>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="layout" content="main" />
-        <g:set var="entityName" value="${message(code: 'rank.label', default: 'Rank')}" />
+        <g:set var="entityName" value="${message(code: 'position.label', default: 'Position')}" />
         <title><g:message code="default.create.label" args="[entityName]" /></title>
     </head>
     <body>
@@ -18,9 +18,9 @@
             <g:if test="${flash.message}">
             <div class="message">${flash.message}</div>
             </g:if>
-            <g:hasErrors bean="${rankInstance}">
+            <g:hasErrors bean="${positionInstance}">
             <div class="errors">
-                <g:renderErrors bean="${rankInstance}" as="list" />
+                <g:renderErrors bean="${positionInstance}" as="list" />
             </div>
             </g:hasErrors>
             <g:form action="save" >
@@ -30,37 +30,28 @@
                         
                             <tr class="prop">
                                 <td valign="top" class="name">
-                                    <label for="name"><g:message code="rank.name.label" default="Name" /></label>
+                                    <label for="name"><g:message code="position.name.label" default="Name" /></label>
                                 </td>
-                                <td valign="top" class="value ${hasErrors(bean: rankInstance, field: 'name', 'errors')}">
-                                    <g:textField name="name" value="${rankInstance?.name}" />
-                                </td>
-                            </tr>
-                        
-                            <tr class="prop">
-                                <td valign="top" class="name">
-                                    <label for="precidence"><g:message code="rank.precidence.label" default="Precidence" /></label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean: rankInstance, field: 'precidence', 'errors')}">
-                                    <g:textField name="precidence" value="${fieldValue(bean: rankInstance, field: 'precidence')}" />
+                                <td valign="top" class="value ${hasErrors(bean: positionInstance, field: 'name', 'errors')}">
+                                    <g:textField name="name" value="${positionInstance?.name}" />
                                 </td>
                             </tr>
                         
                             <tr class="prop">
                                 <td valign="top" class="name">
-                                    <label for="officer"><g:message code="rank.officer.label" default="Officer" /></label>
+                                    <label for="termLength"><g:message code="position.termLength.label" default="Term Length" /></label>
                                 </td>
-                                <td valign="top" class="value ${hasErrors(bean: rankInstance, field: 'officer', 'errors')}">
-                                    <g:checkBox name="officer" value="${rankInstance?.officer}" />
+                                <td valign="top" class="value ${hasErrors(bean: positionInstance, field: 'termLength', 'errors')}">
+                                    <g:textField name="termLength" value="${fieldValue(bean: positionInstance, field: 'termLength')}" />
                                 </td>
                             </tr>
                         
                             <tr class="prop">
                                 <td valign="top" class="name">
-                                    <label for="nonRiding"><g:message code="rank.nonRiding.label" default="Non Riding" /></label>
+                                    <label for="elected"><g:message code="position.elected.label" default="Elected" /></label>
                                 </td>
-                                <td valign="top" class="value ${hasErrors(bean: rankInstance, field: 'nonRiding', 'errors')}">
-                                    <g:checkBox name="nonRiding" value="${rankInstance?.nonRiding}" />
+                                <td valign="top" class="value ${hasErrors(bean: positionInstance, field: 'elected', 'errors')}">
+                                    <g:checkBox name="elected" value="${positionInstance?.elected}" />
                                 </td>
                             </tr>
                         

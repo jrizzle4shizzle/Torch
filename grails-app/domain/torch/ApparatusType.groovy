@@ -1,7 +1,8 @@
 package torch
 
-class AdministrativeTitle {
-	static hasMany = [sitePermissions:String]
+class ApparatusType {
+
+   static hasMany = [sitePermissions:String]
 	
 	String name
 	
