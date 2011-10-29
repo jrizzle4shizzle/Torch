@@ -5,7 +5,8 @@ class Committee {
 	static hasMany = [members:Member]
 	
 	String name
-	Member chair
+	
+	Position chair
 	
 		
     static constraints = {

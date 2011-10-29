@@ -9,7 +9,7 @@ class SitePermissions {
 		//get permissions from known controllers
 		if(permissions == null){
 			permissions = []
-			permissions.addAll PositionController.permissions
+			permissions.addAll PositionTypeController.permissions
 			permissions.addAll CommitteeController.permissions
 			permissions.addAll EventController.permissions
 			permissions.addAll MemberController.permissions

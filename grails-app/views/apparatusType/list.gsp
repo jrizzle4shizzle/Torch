@@ -1,16 +1,16 @@
 
-<%@ page import="torch.Committee" %>
+<%@ page import="torch.ApparatusType" %>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="layout" content="main" />
-        <g:set var="entityName" value="${message(code: 'committee.label', default: 'Committee')}" />
+        <g:set var="entityName" value="${message(code: 'apparatusType.label', default: 'ApparatusType')}" />
         <title><g:message code="default.list.label" args="[entityName]" /></title>
     </head>
     <body>
         <div class="nav">
             <span class="menuButton"><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></span>
-            <g:if test="${session?.CommitteePermission.canCreateNew }">
+            <g:if test="${session?.ApparatusTypePermission.canCreateNew }">
             	<span class="menuButton"><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></span>
 			</g:if>
         </div>
@@ -24,23 +24,19 @@
                     <thead>
                         <tr>
                         
-                            <g:sortableColumn property="id" title="${message(code: 'committee.id.label', default: 'Id')}" />
+                            <g:sortableColumn property="id" title="${message(code: 'apparatusType.id.label', default: 'Id')}" />
                         
-                            <g:sortableColumn property="name" title="${message(code: 'committee.name.label', default: 'Name')}" />
-                        
-                            <th><g:message code="committee.chair.label" default="Chair" /></th>
+                            <g:sortableColumn property="name" title="${message(code: 'apparatusType.name.label', default: 'Name')}" />
                         
                         </tr>
                     </thead>
                     <tbody>
-                    <g:each in="${committeeInstanceList}" status="i" var="committeeInstance">
+                    <g:each in="${apparatusTypeInstanceList}" status="i" var="apparatusTypeInstance">
                         <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
                         
-                            <td><g:link action="show" id="${committeeInstance.id}">${fieldValue(bean: committeeInstance, field: "id")}</g:link></td>
+                            <td><g:link action="show" id="${apparatusTypeInstance.id}">${fieldValue(bean: apparatusTypeInstance, field: "id")}</g:link></td>
                         
-                            <td>${fieldValue(bean: committeeInstance, field: "name")}</td>
-                        
-                            <td>${fieldValue(bean: committeeInstance, field: "chair")}</td>
+                            <td>${fieldValue(bean: apparatusTypeInstance, field: "name")}</td>
                         
                         </tr>
                     </g:each>
@@ -48,7 +44,7 @@
                 </table>
             </div>
             <div class="paginateButtons">
-                <g:paginate total="${committeeInstanceTotal}" />
+                <g:paginate total="${apparatusTypeInstanceTotal}" />
             </div>
         </div>
     </body>

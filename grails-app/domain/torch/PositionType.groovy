@@ -1,28 +1,19 @@
 package torch
 
-class Position {
+class PositionType {
 
     static hasMany = [sitePermissions:String]
 	
 	String name
 	
-	Member member
+	Integer termLength
 	
-	PositionType type
-	
-	Date start
-	
-	Date end
-	
-	Date termEnd
+	Boolean elected
 	
     static constraints = {
 		name(unique:true)
-		member()
-		type()
-		start()
-		end()
-		termEnd()
+		termLength()
+		elected()
 		sitePermissions()
     }
 	

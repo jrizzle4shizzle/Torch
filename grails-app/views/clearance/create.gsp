@@ -1,11 +1,11 @@
 
 
-<%@ page import="torch.Position" %>
+<%@ page import="torch.Clearance" %>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="layout" content="main" />
-        <g:set var="entityName" value="${message(code: 'position.label', default: 'Position')}" />
+        <g:set var="entityName" value="${message(code: 'clearance.label', default: 'Clearance')}" />
         <title><g:message code="default.create.label" args="[entityName]" /></title>
     </head>
     <body>
@@ -18,9 +18,9 @@
             <g:if test="${flash.message}">
             <div class="message">${flash.message}</div>
             </g:if>
-            <g:hasErrors bean="${positionInstance}">
+            <g:hasErrors bean="${clearanceInstance}">
             <div class="errors">
-                <g:renderErrors bean="${positionInstance}" as="list" />
+                <g:renderErrors bean="${clearanceInstance}" as="list" />
             </div>
             </g:hasErrors>
             <g:form action="save" >
@@ -30,55 +30,55 @@
                         
                             <tr class="prop">
                                 <td valign="top" class="name">
-                                    <label for="name"><g:message code="position.name.label" default="Name" /></label>
+                                    <label for="member"><g:message code="clearance.member.label" default="Member" /></label>
                                 </td>
-                                <td valign="top" class="value ${hasErrors(bean: positionInstance, field: 'name', 'errors')}">
-                                    <g:textField name="name" value="${positionInstance?.name}" />
-                                </td>
-                            </tr>
-                        
-                            <tr class="prop">
-                                <td valign="top" class="name">
-                                    <label for="member"><g:message code="position.member.label" default="Member" /></label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean: positionInstance, field: 'member', 'errors')}">
-                                    <g:select name="member.id" from="${torch.Member.list()}" optionKey="id" value="${positionInstance?.member?.id}"  />
+                                <td valign="top" class="value ${hasErrors(bean: clearanceInstance, field: 'member', 'errors')}">
+                                    <g:select name="member.id" from="${torch.Member.list()}" optionKey="id" value="${clearanceInstance?.member?.id}"  />
                                 </td>
                             </tr>
                         
                             <tr class="prop">
                                 <td valign="top" class="name">
-                                    <label for="type"><g:message code="position.type.label" default="Type" /></label>
+                                    <label for="type"><g:message code="clearance.type.label" default="Type" /></label>
                                 </td>
-                                <td valign="top" class="value ${hasErrors(bean: positionInstance, field: 'type', 'errors')}">
-                                    <g:select name="type.id" from="${torch.PositionType.list()}" optionKey="id" value="${positionInstance?.type?.id}"  />
-                                </td>
-                            </tr>
-                        
-                            <tr class="prop">
-                                <td valign="top" class="name">
-                                    <label for="start"><g:message code="position.start.label" default="Start" /></label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean: positionInstance, field: 'start', 'errors')}">
-                                    <g:datePicker name="start" precision="day" value="${positionInstance?.start}"  />
+                                <td valign="top" class="value ${hasErrors(bean: clearanceInstance, field: 'type', 'errors')}">
+                                    <g:select name="type.id" from="${torch.ApparatusType.list()}" optionKey="id" value="${clearanceInstance?.type?.id}"  />
                                 </td>
                             </tr>
                         
                             <tr class="prop">
                                 <td valign="top" class="name">
-                                    <label for="end"><g:message code="position.end.label" default="End" /></label>
+                                    <label for="training"><g:message code="clearance.training.label" default="Training" /></label>
                                 </td>
-                                <td valign="top" class="value ${hasErrors(bean: positionInstance, field: 'end', 'errors')}">
-                                    <g:datePicker name="end" precision="day" value="${positionInstance?.end}"  />
+                                <td valign="top" class="value ${hasErrors(bean: clearanceInstance, field: 'training', 'errors')}">
+                                    <g:checkBox name="training" value="${clearanceInstance?.training}" />
                                 </td>
                             </tr>
                         
                             <tr class="prop">
                                 <td valign="top" class="name">
-                                    <label for="termEnd"><g:message code="position.termEnd.label" default="Term End" /></label>
+                                    <label for="ride"><g:message code="clearance.ride.label" default="Ride" /></label>
                                 </td>
-                                <td valign="top" class="value ${hasErrors(bean: positionInstance, field: 'termEnd', 'errors')}">
-                                    <g:datePicker name="termEnd" precision="day" value="${positionInstance?.termEnd}"  />
+                                <td valign="top" class="value ${hasErrors(bean: clearanceInstance, field: 'ride', 'errors')}">
+                                    <g:checkBox name="ride" value="${clearanceInstance?.ride}" />
+                                </td>
+                            </tr>
+                        
+                            <tr class="prop">
+                                <td valign="top" class="name">
+                                    <label for="driverTraining"><g:message code="clearance.driverTraining.label" default="Driver Training" /></label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(bean: clearanceInstance, field: 'driverTraining', 'errors')}">
+                                    <g:checkBox name="driverTraining" value="${clearanceInstance?.driverTraining}" />
+                                </td>
+                            </tr>
+                        
+                            <tr class="prop">
+                                <td valign="top" class="name">
+                                    <label for="drive"><g:message code="clearance.drive.label" default="Drive" /></label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(bean: clearanceInstance, field: 'drive', 'errors')}">
+                                    <g:checkBox name="drive" value="${clearanceInstance?.drive}" />
                                 </td>
                             </tr>
                         

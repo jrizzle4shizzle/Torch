@@ -1,6 +1,6 @@
 
 
-<%@ page import="torch.Position" %>
+<%@ page import="torch.PositionType" %>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -39,46 +39,19 @@
                         
                             <tr class="prop">
                                 <td valign="top" class="name">
-                                    <label for="member"><g:message code="position.member.label" default="Member" /></label>
+                                    <label for="termLength"><g:message code="position.termLength.label" default="Term Length" /></label>
                                 </td>
-                                <td valign="top" class="value ${hasErrors(bean: positionInstance, field: 'member', 'errors')}">
-                                    <g:select name="member.id" from="${torch.Member.list()}" optionKey="id" value="${positionInstance?.member?.id}"  />
-                                </td>
-                            </tr>
-                        
-                            <tr class="prop">
-                                <td valign="top" class="name">
-                                    <label for="type"><g:message code="position.type.label" default="Type" /></label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean: positionInstance, field: 'type', 'errors')}">
-                                    <g:select name="type.id" from="${torch.PositionType.list()}" optionKey="id" value="${positionInstance?.type?.id}"  />
+                                <td valign="top" class="value ${hasErrors(bean: positionInstance, field: 'termLength', 'errors')}">
+                                    <g:textField name="termLength" value="${fieldValue(bean: positionInstance, field: 'termLength')}" />
                                 </td>
                             </tr>
                         
                             <tr class="prop">
                                 <td valign="top" class="name">
-                                    <label for="start"><g:message code="position.start.label" default="Start" /></label>
+                                    <label for="elected"><g:message code="position.elected.label" default="Elected" /></label>
                                 </td>
-                                <td valign="top" class="value ${hasErrors(bean: positionInstance, field: 'start', 'errors')}">
-                                    <g:datePicker name="start" precision="day" value="${positionInstance?.start}"  />
-                                </td>
-                            </tr>
-                        
-                            <tr class="prop">
-                                <td valign="top" class="name">
-                                    <label for="end"><g:message code="position.end.label" default="End" /></label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean: positionInstance, field: 'end', 'errors')}">
-                                    <g:datePicker name="end" precision="day" value="${positionInstance?.end}"  />
-                                </td>
-                            </tr>
-                        
-                            <tr class="prop">
-                                <td valign="top" class="name">
-                                    <label for="termEnd"><g:message code="position.termEnd.label" default="Term End" /></label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean: positionInstance, field: 'termEnd', 'errors')}">
-                                    <g:datePicker name="termEnd" precision="day" value="${positionInstance?.termEnd}"  />
+                                <td valign="top" class="value ${hasErrors(bean: positionInstance, field: 'elected', 'errors')}">
+                                    <g:checkBox name="elected" value="${positionInstance?.elected}" />
                                 </td>
                             </tr>
                         

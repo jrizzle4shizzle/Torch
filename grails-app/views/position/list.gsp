@@ -28,9 +28,13 @@
                         
                             <g:sortableColumn property="name" title="${message(code: 'position.name.label', default: 'Name')}" />
                         
-                            <g:sortableColumn property="termLength" title="${message(code: 'position.termLength.label', default: 'Term Length')}" />
+                            <th><g:message code="position.member.label" default="Member" /></th>
                         
-                            <g:sortableColumn property="elected" title="${message(code: 'position.elected.label', default: 'Elected')}" />
+                            <th><g:message code="position.type.label" default="Type" /></th>
+                        
+                            <g:sortableColumn property="start" title="${message(code: 'position.start.label', default: 'Start')}" />
+                        
+                            <g:sortableColumn property="end" title="${message(code: 'position.end.label', default: 'End')}" />
                         
                         </tr>
                     </thead>
@@ -42,9 +46,13 @@
                         
                             <td>${fieldValue(bean: positionInstance, field: "name")}</td>
                         
-                            <td>${fieldValue(bean: positionInstance, field: "termLength")}</td>
+                            <td>${fieldValue(bean: positionInstance, field: "member")}</td>
                         
-                            <td><g:formatBoolean boolean="${positionInstance.elected}" /></td>
+                            <td>${fieldValue(bean: positionInstance, field: "type")}</td>
+                        
+                            <td><g:formatDate date="${positionInstance.start}" /></td>
+                        
+                            <td><g:formatDate date="${positionInstance.end}" /></td>
                         
                         </tr>
                     </g:each>

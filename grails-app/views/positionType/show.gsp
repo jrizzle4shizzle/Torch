@@ -1,17 +1,17 @@
 
-<%@ page import="torch.Committee" %>
+<%@ page import="torch.PositionType" %>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="layout" content="main" />
-        <g:set var="entityName" value="${message(code: 'committee.label', default: 'Committee')}" />
+        <g:set var="entityName" value="${message(code: 'position.label', default: 'Position')}" />
         <title><g:message code="default.show.label" args="[entityName]" /></title>
     </head>
     <body>
         <div class="nav">
             <span class="menuButton"><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></span>
             <span class="menuButton"><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></span>
-            <g:if test="${session?.CommitteePermission.canCreateNew }">
+            <g:if test="${session?.PositionPermission.canCreateNew }">
             	<span class="menuButton"><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></span>
         	</g:if>
         </div>
@@ -25,36 +25,37 @@
                     <tbody>
                     
                         <tr class="prop">
-                            <td valign="top" class="name"><g:message code="committee.id.label" default="Id" /></td>
+                            <td valign="top" class="name"><g:message code="position.id.label" default="Id" /></td>
                             
-                            <td valign="top" class="value">${fieldValue(bean: committeeInstance, field: "id")}</td>
-                            
-                        </tr>
-                    
-                        <tr class="prop">
-                            <td valign="top" class="name"><g:message code="committee.name.label" default="Name" /></td>
-                            
-                            <td valign="top" class="value">${fieldValue(bean: committeeInstance, field: "name")}</td>
+                            <td valign="top" class="value">${fieldValue(bean: positionInstance, field: "id")}</td>
                             
                         </tr>
                     
                         <tr class="prop">
-                            <td valign="top" class="name"><g:message code="committee.chair.label" default="Chair" /></td>
+                            <td valign="top" class="name"><g:message code="position.name.label" default="Name" /></td>
                             
-                            <td valign="top" class="value"><g:link controller="position" action="show" id="${committeeInstance?.chair?.id}">${committeeInstance?.chair?.encodeAsHTML()}</g:link></td>
+                            <td valign="top" class="value">${fieldValue(bean: positionInstance, field: "name")}</td>
                             
                         </tr>
                     
                         <tr class="prop">
-                            <td valign="top" class="name"><g:message code="committee.members.label" default="Members" /></td>
+                            <td valign="top" class="name"><g:message code="position.termLength.label" default="Term Length" /></td>
                             
-                            <td valign="top" style="text-align: left;" class="value">
-                                <ul>
-                                <g:each in="${committeeInstance.members}" var="m">
-                                    <li><g:link controller="member" action="show" id="${m.id}">${m?.encodeAsHTML()}</g:link></li>
-                                </g:each>
-                                </ul>
-                            </td>
+                            <td valign="top" class="value">${fieldValue(bean: positionInstance, field: "termLength")}</td>
+                            
+                        </tr>
+                    
+                        <tr class="prop">
+                            <td valign="top" class="name"><g:message code="position.elected.label" default="Elected" /></td>
+                            
+                            <td valign="top" class="value"><g:formatBoolean boolean="${positionInstance?.elected}" /></td>
+                            
+                        </tr>
+                    
+                        <tr class="prop">
+                            <td valign="top" class="name"><g:message code="position.sitePermissions.label" default="Site Permissions" /></td>
+                            
+                            <td valign="top" class="value">${fieldValue(bean: positionInstance, field: "sitePermissions")}</td>
                             
                         </tr>
                     
@@ -63,11 +64,11 @@
             </div>
             <div class="buttons">
                 <g:form>
-                    <g:hiddenField name="id" value="${committeeInstance?.id}" />
-                    <g:if test="${session?.CommitteePermission.canEdit }">
+                    <g:hiddenField name="id" value="${positionInstance?.id}" />
+                    <g:if test="${session?.PositionPermission.canEdit }">
                     	<span class="button"><g:actionSubmit class="edit" action="edit" value="${message(code: 'default.button.edit.label', default: 'Edit')}" /></span>
                     </g:if>
-                    <g:if test="${session?.CommitteePermission.canDelete }">
+                    <g:if test="${session?.PositionPermission.canDelete }">
                     	<span class="button"><g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" /></span>
                 	</g:if>
                 </g:form>

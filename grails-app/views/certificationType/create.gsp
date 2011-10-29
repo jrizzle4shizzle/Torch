@@ -1,11 +1,11 @@
 
 
-<%@ page import="torch.Committee" %>
+<%@ page import="torch.CertificationType" %>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="layout" content="main" />
-        <g:set var="entityName" value="${message(code: 'committee.label', default: 'Committee')}" />
+        <g:set var="entityName" value="${message(code: 'certificationType.label', default: 'CertificationType')}" />
         <title><g:message code="default.create.label" args="[entityName]" /></title>
     </head>
     <body>
@@ -18,9 +18,9 @@
             <g:if test="${flash.message}">
             <div class="message">${flash.message}</div>
             </g:if>
-            <g:hasErrors bean="${committeeInstance}">
+            <g:hasErrors bean="${certificationTypeInstance}">
             <div class="errors">
-                <g:renderErrors bean="${committeeInstance}" as="list" />
+                <g:renderErrors bean="${certificationTypeInstance}" as="list" />
             </div>
             </g:hasErrors>
             <g:form action="save" >
@@ -30,19 +30,10 @@
                         
                             <tr class="prop">
                                 <td valign="top" class="name">
-                                    <label for="name"><g:message code="committee.name.label" default="Name" /></label>
+                                    <label for="name"><g:message code="certificationType.name.label" default="Name" /></label>
                                 </td>
-                                <td valign="top" class="value ${hasErrors(bean: committeeInstance, field: 'name', 'errors')}">
-                                    <g:textField name="name" value="${committeeInstance?.name}" />
-                                </td>
-                            </tr>
-                        
-                            <tr class="prop">
-                                <td valign="top" class="name">
-                                    <label for="chair"><g:message code="committee.chair.label" default="Chair" /></label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean: committeeInstance, field: 'chair', 'errors')}">
-                                    <g:select name="chair.id" from="${torch.Position.list()}" optionKey="id" value="${committeeInstance?.chair?.id}"  />
+                                <td valign="top" class="value ${hasErrors(bean: certificationTypeInstance, field: 'name', 'errors')}">
+                                    <g:textField name="name" value="${certificationTypeInstance?.name}" />
                                 </td>
                             </tr>
                         

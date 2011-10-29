@@ -4,7 +4,7 @@ class CommitteeController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
-	static permissions = ["committee.all", "committee.create", "committee.update", "committee.delete"]
+	static permissions = ["Committee.all", "Committee.create", "Committee.update", "Committee.delete"]
 	
 	def beforeInterceptor = [action:this.&clearPermissions]
 	
@@ -15,7 +15,7 @@ class CommitteeController {
 		
 		def userPermissions = SitePermissions.getPermissionsForUser(user)
 		
-		return(userPermissions?.contains("committee.create"))
+		return(userPermissions?.contains("Committee.create"))
 	}
 	
 	boolean canUpdate(Member user){
@@ -25,7 +25,7 @@ class CommitteeController {
 		
 		def userPermissions = SitePermissions.getPermissionsForUser(user)
 		
-		return(userPermissions?.contains("committee.update"))
+		return(userPermissions?.contains("Committee.update"))
 	}
 	
 	boolean canDelete(Member user){
@@ -35,12 +35,12 @@ class CommitteeController {
 		
 		def userPermissions = SitePermissions.getPermissionsForUser(user)
 		
-		return(userPermissions?.contains("committee.delete"))
+		return(userPermissions?.contains("Committee.delete"))
 	}
 	
 	def clearPermissions(){
 		def perms = [:]
-		session?.committeePermission=perms
+		session?.CommitteePermission=perms
 	}
 	
     def index = {
@@ -48,25 +48,21 @@ class CommitteeController {
     }
 
     def list = {
-		//permissions
 		if(canCreate(session?.user)){
-			session?.committeePermission?.canCreateNew = true
+			session?.CommitteePermission?.canCreateNew = true
 		}
-		
 		
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
         [committeeInstanceList: Committee.list(params), committeeInstanceTotal: Committee.count()]
     }
 
     def create = {
-		
-		//allows
-		if(!(canCreate(session?.user))){
+		//permission check
+		if( !(canCreate(session?.user))){
 			flash.message = "You don't have permission to do that."
 			redirect(uri:"/")
 			return false
 		}
-		
 		
         def committeeInstance = new Committee()
         committeeInstance.properties = params
@@ -74,16 +70,14 @@ class CommitteeController {
     }
 
     def save = {
-		def committeeInstance = new Committee(params)
-		
-		//allows
-		if(!(canCreate(session?.user))){
+		//permission check
+		if( !(canCreate(session?.user))){
 			flash.message = "You don't have permission to do that."
 			redirect(uri:"/")
 			return false
 		}
 		
-        
+        def committeeInstance = new Committee(params)
         if (committeeInstance.save(flush: true)) {
             flash.message = "${message(code: 'default.created.message', args: [message(code: 'committee.label', default: 'Committee'), committeeInstance.id])}"
             redirect(action: "show", id: committeeInstance.id)
@@ -102,19 +96,14 @@ class CommitteeController {
         else {
 			//set permissions
 			if(canUpdate(session?.user)){
-				session?.committeePermission?.canEdit = true
+				session?.CommitteePermission?.canEdit = true
 			}
 			if(canDelete(session?.user)){
-				session?.committeePermission?.canDelete = true
+				session?.CommitteePermission?.canDelete = true
 			}
 			
 			if(canCreate(session?.user)){
-				session?.committeePermission?.canCreateNew = true
-			}
-			
-			//set chairman permissions
-			if(session?.user?.login == committeeInstance.chair?.login){
-				session?.committeePermission?.canEdit = true
+				session?.CommitteePermission?.canCreateNew = true
 			}
 			
             [committeeInstance: committeeInstance]
@@ -128,8 +117,8 @@ class CommitteeController {
             redirect(action: "list")
         }
         else {
-			
-			if(!((canCreate(session?.user)) || (session?.user?.login == committeeInstance.chair?.login))){
+			//permission check
+			if( !(session?.user?.role == "admin") ){
 				flash.message = "You don't have permission to do that."
 				redirect(uri:"/")
 				return false
@@ -137,34 +126,24 @@ class CommitteeController {
 			
 			//set permissions
 			if(canUpdate(session?.user)){
-				session?.committeePermission?.canEdit = true
+				session?.CommitteePermission?.canEdit = true
 			}
-			
 			if(canDelete(session?.user)){
-				session?.committeePermission?.canDelete = true
+				session?.CommitteePermission?.canDelete = true
 			}
 			
 			if(canCreate(session?.user)){
-				session?.committeePermission?.canCreateNew = true
+				session?.CommitteePermission?.canCreateNew = true
 			}
-			
-			//set chairman permissions
-			if(session?.user?.login == committeeInstance.chair?.login){
-				session?.committeePermission?.canEdit = true
-			}
-			
-			//get list of active members
-			def activeMembers = Member.findAllByActive(true)
-			
-            return [committeeInstance: committeeInstance, members: activeMembers]
+            return [committeeInstance: committeeInstance]
         }
     }
 
     def update = {
         def committeeInstance = Committee.get(params.id)
         if (committeeInstance) {
-			
-			if(!((canCreate(session?.user)) || (session?.user?.login == committeeInstance.chair?.login))){
+			//permissions check
+			if( !(canUpdate(session?.user))){
 				flash.message = "You don't have permission to do that."
 				redirect(uri:"/")
 				return false
@@ -197,7 +176,8 @@ class CommitteeController {
     def delete = {
         def committeeInstance = Committee.get(params.id)
         if (committeeInstance) {
-			if(!(canDelete(session?.user))){
+			//permissions check
+			if( !(canDelete(session?.user) )){
 				flash.message = "You don't have permission to do that."
 				redirect(uri:"/")
 				return false
@@ -207,7 +187,8 @@ class CommitteeController {
                 committeeInstance.delete(flush: true)
                 flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'committee.label', default: 'Committee'), params.id])}"
                 redirect(action: "list")
-            }catch (org.springframework.dao.DataIntegrityViolationException e) {
+            }
+            catch (org.springframework.dao.DataIntegrityViolationException e) {
                 flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'committee.label', default: 'Committee'), params.id])}"
                 redirect(action: "show", id: params.id)
             }
