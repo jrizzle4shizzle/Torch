@@ -60,7 +60,7 @@
                                     <label for="type"><g:message code="event.type.label" default="Type" /></label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: eventInstance, field: 'type', 'errors')}">
-                                    <g:select name="type" from="${eventInstance.constraints.type.inList}" value="${eventInstance?.type}" valueMessagePrefix="event.type"  />
+                                    <g:select name="type.id" from="${torch.EventType.list()}" optionKey="id" value="${eventInstance?.type?.id}"  />
                                 </td>
                             </tr>
                         

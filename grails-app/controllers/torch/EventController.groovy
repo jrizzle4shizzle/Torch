@@ -1,18 +1,10 @@
 package torch
 
-import java.util.List;
-
-
-class EventController{
+class EventController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
-	
-	static permissions = ["event.all-all", 
-		"event.meeting-all", "event.meeting-create", "event.meeting-delete", "event.meeting-update",
-		"event.drill-all", "event.drill-create", "event.drill-delete", "event.drill-update",
-		"event.fundraiser-all", "event.fundraiser-create", "event.fundraiser-delete", "event.drill-update"
-		];
-	
+
+	static permissions = ["Event.all", "Event.create", "Event.update", "Event.delete"]
 	
 	def beforeInterceptor = [action:this.&clearPermissions]
 	
@@ -23,65 +15,32 @@ class EventController{
 		
 		def userPermissions = SitePermissions.getPermissionsForUser(user)
 		
-		return (userPermissions?.contains("event.all-all") ||
-			userPermissions?.contains("event.meeting-all") || userPermissions?.contains("event.meeting-create") ||
-			userPermissions?.contains("event.drill-all") || userPermissions?.contains("event.drill-create") ||
-			userPermissions?.contains("event.fundraiser-all") || userPermissions?.contains("event.fundraiser-create"))
+		return(userPermissions?.contains("Event.create"))
 	}
 	
-	boolean canUpdate(Member user, String type){
+	boolean canUpdate(Member user){
 		if(session?.user?.role == "admin"){
 			return true
 		}
 		
 		def userPermissions = SitePermissions.getPermissionsForUser(user)
 		
-		if(userPermissions.contains("event.all-all")){
-			return true;
-		}
-		
-		switch(type){
-			case "meeting":
-				return (userPermissions.contains("event.meeting-all") || userPermissions.contains("event.meeting-update"))
-				break;
-			case "drill":
-				return (userPermissions.contains("event.drill-all") || userPermissions.contains("event.drill-update"))
-				break;
-			case "fundraiser":
-				return (userPermissions.contains("event.fundraiser-all") || userPermissions.contains("event.fundraiser-update"))
-				break;
-		}
-		return false;
+		return(userPermissions?.contains("Event.update"))
 	}
 	
-	boolean canDelete(Member user, String type){
+	boolean canDelete(Member user){
 		if(session?.user?.role == "admin"){
 			return true
 		}
 		
 		def userPermissions = SitePermissions.getPermissionsForUser(user)
 		
-		if(userPermissions.contains("event.all-all")){
-			return true;
-		}
-		
-		switch(type){
-			case "meeting":
-				return (userPermissions.contains("event.meeting-all") || userPermissions.contains("event.meeting-delete"))
-				break;
-			case "drill":
-				return (userPermissions.contains("event.drill-all") || userPermissions.contains("event.drill-delete"))
-				break;
-			case "fundraiser":
-				return (userPermissions.contains("event.fundraiser-all") || userPermissions.contains("event.fundraiser-delete"))
-				break;
-		}
-		return false;
+		return(userPermissions?.contains("Event.delete"))
 	}
 	
 	def clearPermissions(){
 		def perms = [:]
-		session?.eventPermission=perms
+		session?.EventPermission=perms
 	}
 	
     def index = {
@@ -89,13 +48,9 @@ class EventController{
     }
 
     def list = {
-		def user = session.user
-		
-		//permissions:
-		if (canCreate(user)){
-			session?.eventPermission?.canCreateNew = true
+		if(canCreate(session?.user)){
+			session?.EventPermission?.canCreateNew = true
 		}
-		
 		
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
         [eventInstanceList: Event.list(params), eventInstanceTotal: Event.count()]
@@ -113,7 +68,7 @@ class EventController{
         eventInstance.properties = params
         return [eventInstance: eventInstance]
     }
-	
+
     def save = {
 		//permission check
 		if( !(canCreate(session?.user))){
@@ -140,16 +95,17 @@ class EventController{
         }
         else {
 			//set permissions
-			if(canUpdate(session?.user, eventInstance.type)){
-				session?.eventPermission?.canEdit = true
+			if(canUpdate(session?.user)){
+				session?.EventPermission?.canEdit = true
 			}
-			if(canDelete(session?.user, eventInstance.type)){
-				session?.eventPermission?.canDelete = true
+			if(canDelete(session?.user)){
+				session?.EventPermission?.canDelete = true
 			}
 			
 			if(canCreate(session?.user)){
-				session?.eventPermission?.canCreateNew = true
+				session?.EventPermission?.canCreateNew = true
 			}
+			
             [eventInstance: eventInstance]
         }
     }
@@ -169,27 +125,25 @@ class EventController{
 			}
 			
 			//set permissions
-			if(canUpdate(session?.user, eventInstance.type)){
-				session?.eventPermission?.canEdit = true
+			if(canUpdate(session?.user)){
+				session?.EventPermission?.canEdit = true
 			}
-			if(canDelete(session?.user, eventInstance.type)){
-				session?.eventPermission?.canDelete = true
+			if(canDelete(session?.user)){
+				session?.EventPermission?.canDelete = true
 			}
 			
 			if(canCreate(session?.user)){
-				session?.eventPermission?.canCreateNew = true
+				session?.EventPermission?.canCreateNew = true
 			}
-			
             return [eventInstance: eventInstance]
         }
     }
 
-	
     def update = {
         def eventInstance = Event.get(params.id)
         if (eventInstance) {
 			//permissions check
-			if( !(canUpdate(session?.user, eventInstance?.type))){
+			if( !(canUpdate(session?.user))){
 				flash.message = "You don't have permission to do that."
 				redirect(uri:"/")
 				return false
@@ -218,15 +172,12 @@ class EventController{
             redirect(action: "list")
         }
     }
-	
-	
 
     def delete = {
-		def eventInstance = Event.get(params.id)
-		
+        def eventInstance = Event.get(params.id)
         if (eventInstance) {
 			//permissions check
-			if( !(canDelete(session?.user, eventInstance?.type) )){
+			if( !(canDelete(session?.user) )){
 				flash.message = "You don't have permission to do that."
 				redirect(uri:"/")
 				return false

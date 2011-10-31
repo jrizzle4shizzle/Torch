@@ -12,7 +12,7 @@
         <div class="nav">
             <span class="menuButton"><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></span>
             <span class="menuButton"><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></span>
-            <g:if test="${session.eventPermission?.canCreateNew }">
+            <g:if test="${session?.EventPermission.canCreateNew }">            
             	<span class="menuButton"><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></span>
         	</g:if>
         </div>
@@ -74,7 +74,7 @@
                                   <label for="type"><g:message code="event.type.label" default="Type" /></label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: eventInstance, field: 'type', 'errors')}">
-                                    <g:select name="type" from="${eventInstance.constraints.type.inList}" value="${eventInstance?.type}" valueMessagePrefix="event.type"  />
+                                    <g:select name="type.id" from="${torch.EventType.list()}" optionKey="id" value="${eventInstance?.type?.id}"  />
                                 </td>
                             </tr>
                         
@@ -83,7 +83,8 @@
                 </div>
                 <div class="buttons">
                     <span class="button"><g:actionSubmit class="save" action="update" value="${message(code: 'default.button.update.label', default: 'Update')}" /></span>
-            		<g:if test="${eventPermission.canDelete }">
+		
+		            <g:if test="${session?.EventPermission.canDelete }">
                     	<span class="button"><g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" /></span>
                 	</g:if>
                 </div>

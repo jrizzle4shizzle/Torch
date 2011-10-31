@@ -11,9 +11,8 @@
         <div class="nav">
             <span class="menuButton"><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></span>
             <span class="menuButton"><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></span>
-            
-            <g:if test="${session?.eventPermission.canCreateNew }">
-           		<span class="menuButton"><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></span>
+            <g:if test="${session?.EventPermission.canCreateNew }">
+            	<span class="menuButton"><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></span>
         	</g:if>
         </div>
         <div class="body">
@@ -24,6 +23,13 @@
             <div class="dialog">
                 <table>
                     <tbody>
+                    
+                        <tr class="prop">
+                            <td valign="top" class="name"><g:message code="event.id.label" default="Id" /></td>
+                            
+                            <td valign="top" class="value">${fieldValue(bean: eventInstance, field: "id")}</td>
+                            
+                        </tr>
                     
                         <tr class="prop">
                             <td valign="top" class="name"><g:message code="event.name.label" default="Name" /></td>
@@ -62,7 +68,7 @@
                         <tr class="prop">
                             <td valign="top" class="name"><g:message code="event.type.label" default="Type" /></td>
                             
-                            <td valign="top" class="value">${fieldValue(bean: eventInstance, field: "type")}</td>
+                            <td valign="top" class="value"><g:link controller="eventType" action="show" id="${eventInstance?.type?.id}">${eventInstance?.type?.encodeAsHTML()}</g:link></td>
                             
                         </tr>
                     
@@ -72,10 +78,10 @@
             <div class="buttons">
                 <g:form>
                     <g:hiddenField name="id" value="${eventInstance?.id}" />
-                    <g:if test="${session?.eventPermission.canEdit }">
+                    <g:if test="${session?.EventPermission.canEdit }">
                     	<span class="button"><g:actionSubmit class="edit" action="edit" value="${message(code: 'default.button.edit.label', default: 'Edit')}" /></span>
                     </g:if>
-                    <g:if test="${session?.eventPermission.canDelete }">
+                    <g:if test="${session?.EventPermission.canDelete }">
                     	<span class="button"><g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" /></span>
                 	</g:if>
                 </g:form>

@@ -3,9 +3,9 @@ package torch
 class Event {
 	static hasMany = [attendees:Member]
 	
+	EventType type
 	String name
 	Date date
-	String type
 	Member pointOfContact
 	
     static constraints = {
@@ -13,7 +13,7 @@ class Event {
 		date()
 		attendees()
 		pointOfContact()
-		type(inList:["drill", "meeting", "fundraiser"])
+		type()
     }
 	
 	
