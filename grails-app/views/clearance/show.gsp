@@ -67,13 +67,6 @@
                         </tr>
                     
                         <tr class="prop">
-                            <td valign="top" class="name"><g:message code="clearance.sitePermissions.label" default="Site Permissions" /></td>
-                            
-                            <td valign="top" class="value">${fieldValue(bean: clearanceInstance, field: "sitePermissions")}</td>
-                            
-                        </tr>
-                    
-                        <tr class="prop">
                             <td valign="top" class="name"><g:message code="clearance.drive.label" default="Drive" /></td>
                             
                             <td valign="top" class="value"><g:formatBoolean boolean="${clearanceInstance?.drive}" /></td>

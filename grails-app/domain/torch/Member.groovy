@@ -15,7 +15,6 @@ class Member {
 	String mobilePhoneNumber
 	String notes
 	Rank rank
-	MembershipType membershipType
 	String birthDay
 	Boolean aacoRidingDatabase
 	Integer badgeNumber
@@ -30,7 +29,6 @@ class Member {
 	Date driversLicenseExpiration
 	Boolean administrative
 	Date membershipDate
-	//AdministrativeTitle administrativeTitle
 	String role = "member"
 	
 	
@@ -47,7 +45,6 @@ class Member {
 		mobilePhoneNumber(nullable:true)
 		notes(nullable:true)
 		rank(nullable:true)
-		membershipType(nullable:true)
 		birthDay(nullable:true)
 		aacoRidingDatabase(nullable:true)
 		badgeNumber(nullable:true)
@@ -63,7 +60,6 @@ class Member {
 		active(nullable:true)
 		administrative(nullable:true)
 		membershipDate(nullable:true)
-		//administrativeTitle(nullable:true)
 		role(inList:["member", "admin"])
     }
 	

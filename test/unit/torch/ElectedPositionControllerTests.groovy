@@ -2,7 +2,7 @@ package torch
 
 import grails.test.*
 
-class PositionTests extends GrailsUnitTestCase {
+class ElectedPositionControllerTests extends ControllerUnitTestCase {
     protected void setUp() {
         super.setUp()
     }

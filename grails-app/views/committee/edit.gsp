@@ -47,7 +47,7 @@
                                   <label for="chair"><g:message code="committee.chair.label" default="Chair" /></label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: committeeInstance, field: 'chair', 'errors')}">
-                                    <g:select name="chair.id" from="${torch.Position.list()}" optionKey="id" value="${committeeInstance?.chair?.id}"  />
+                                    <g:select name="chair.id" from="${torch.ElectedPosition.list()}" optionKey="id" value="${committeeInstance?.chair?.id}"  />
                                 </td>
                             </tr>
                         

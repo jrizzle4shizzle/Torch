@@ -1,6 +1,6 @@
 package torch
 
-class Position {
+class ElectedPosition {
 
     static hasMany = [sitePermissions:String]
 	
@@ -12,7 +12,7 @@ class Position {
 	
 	Date start
 	
-	Date end
+	Date finish
 	
 	Date termEnd
 	
@@ -21,7 +21,7 @@ class Position {
 		member()
 		type()
 		start()
-		end()
+		finish()
 		termEnd()
 		sitePermissions()
     }

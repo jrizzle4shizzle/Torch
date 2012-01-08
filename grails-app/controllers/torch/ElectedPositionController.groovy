@@ -1,6 +1,6 @@
 package torch
 
-class PositionController {
+class ElectedPositionController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
@@ -53,7 +53,7 @@ class PositionController {
 		}
 		
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
-        [positionInstanceList: Position.list(params), positionInstanceTotal: Position.count()]
+        [positionInstanceList: ElectedPosition.list(params), positionInstanceTotal: ElectedPosition.count()]
     }
 
     def create = {
@@ -64,7 +64,7 @@ class PositionController {
 			return false
 		}
 		
-        def positionInstance = new Position()
+        def positionInstance = new ElectedPosition()
         positionInstance.properties = params
         return [positionInstance: positionInstance]
     }
@@ -77,7 +77,7 @@ class PositionController {
 			return false
 		}
 		
-        def positionInstance = new Position(params)
+        def positionInstance = new ElectedPosition(params)
         if (positionInstance.save(flush: true)) {
             flash.message = "${message(code: 'default.created.message', args: [message(code: 'position.label', default: 'Position'), positionInstance.id])}"
             redirect(action: "show", id: positionInstance.id)
@@ -88,7 +88,7 @@ class PositionController {
     }
 
     def show = {
-        def positionInstance = Position.get(params.id)
+        def positionInstance = ElectedPosition.get(params.id)
         if (!positionInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'position.label', default: 'Position'), params.id])}"
             redirect(action: "list")
@@ -111,7 +111,7 @@ class PositionController {
     }
 
     def edit = {
-        def positionInstance = Position.get(params.id)
+        def positionInstance = ElectedPosition.get(params.id)
         if (!positionInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'position.label', default: 'Position'), params.id])}"
             redirect(action: "list")
@@ -140,7 +140,7 @@ class PositionController {
     }
 
     def update = {
-        def positionInstance = Position.get(params.id)
+        def positionInstance = ElectedPosition.get(params.id)
         if (positionInstance) {
 			//permissions check
 			if( !(canUpdate(session?.user))){
@@ -174,7 +174,7 @@ class PositionController {
     }
 
     def delete = {
-        def positionInstance = Position.get(params.id)
+        def positionInstance = ElectedPosition.get(params.id)
         if (positionInstance) {
 			//permissions check
 			if( !(canDelete(session?.user) )){

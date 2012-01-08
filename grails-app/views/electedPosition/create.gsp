@@ -1,11 +1,11 @@
 
 
-<%@ page import="torch.Position" %>
+<%@ page import="torch.ElectedPosition" %>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="layout" content="main" />
-        <g:set var="entityName" value="${message(code: 'position.label', default: 'Position')}" />
+        <g:set var="entityName" value="${message(code: 'electedPosition.label', default: 'ElectedPosition')}" />
         <title><g:message code="default.create.label" args="[entityName]" /></title>
     </head>
     <body>
@@ -18,9 +18,9 @@
             <g:if test="${flash.message}">
             <div class="message">${flash.message}</div>
             </g:if>
-            <g:hasErrors bean="${positionInstance}">
+            <g:hasErrors bean="${electedPositionInstance}">
             <div class="errors">
-                <g:renderErrors bean="${positionInstance}" as="list" />
+                <g:renderErrors bean="${electedPositionInstance}" as="list" />
             </div>
             </g:hasErrors>
             <g:form action="save" >
@@ -30,55 +30,55 @@
                         
                             <tr class="prop">
                                 <td valign="top" class="name">
-                                    <label for="name"><g:message code="position.name.label" default="Name" /></label>
+                                    <label for="name"><g:message code="electedPosition.name.label" default="Name" /></label>
                                 </td>
-                                <td valign="top" class="value ${hasErrors(bean: positionInstance, field: 'name', 'errors')}">
-                                    <g:textField name="name" value="${positionInstance?.name}" />
-                                </td>
-                            </tr>
-                        
-                            <tr class="prop">
-                                <td valign="top" class="name">
-                                    <label for="member"><g:message code="position.member.label" default="Member" /></label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean: positionInstance, field: 'member', 'errors')}">
-                                    <g:select name="member.id" from="${torch.Member.list()}" optionKey="id" value="${positionInstance?.member?.id}"  />
+                                <td valign="top" class="value ${hasErrors(bean: electedPositionInstance, field: 'name', 'errors')}">
+                                    <g:textField name="name" value="${electedPositionInstance?.name}" />
                                 </td>
                             </tr>
                         
                             <tr class="prop">
                                 <td valign="top" class="name">
-                                    <label for="type"><g:message code="position.type.label" default="Type" /></label>
+                                    <label for="member"><g:message code="electedPosition.member.label" default="Member" /></label>
                                 </td>
-                                <td valign="top" class="value ${hasErrors(bean: positionInstance, field: 'type', 'errors')}">
-                                    <g:select name="type.id" from="${torch.PositionType.list()}" optionKey="id" value="${positionInstance?.type?.id}"  />
-                                </td>
-                            </tr>
-                        
-                            <tr class="prop">
-                                <td valign="top" class="name">
-                                    <label for="start"><g:message code="position.start.label" default="Start" /></label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean: positionInstance, field: 'start', 'errors')}">
-                                    <g:datePicker name="start" precision="day" value="${positionInstance?.start}"  />
+                                <td valign="top" class="value ${hasErrors(bean: electedPositionInstance, field: 'member', 'errors')}">
+                                    <g:select name="member.id" from="${torch.Member.list()}" optionKey="id" value="${electedPositionInstance?.member?.id}"  />
                                 </td>
                             </tr>
                         
                             <tr class="prop">
                                 <td valign="top" class="name">
-                                    <label for="end"><g:message code="position.end.label" default="End" /></label>
+                                    <label for="type"><g:message code="electedPosition.type.label" default="Type" /></label>
                                 </td>
-                                <td valign="top" class="value ${hasErrors(bean: positionInstance, field: 'end', 'errors')}">
-                                    <g:datePicker name="end" precision="day" value="${positionInstance?.end}"  />
+                                <td valign="top" class="value ${hasErrors(bean: electedPositionInstance, field: 'type', 'errors')}">
+                                    <g:select name="type.id" from="${torch.PositionType.list()}" optionKey="id" value="${electedPositionInstance?.type?.id}"  />
                                 </td>
                             </tr>
                         
                             <tr class="prop">
                                 <td valign="top" class="name">
-                                    <label for="termEnd"><g:message code="position.termEnd.label" default="Term End" /></label>
+                                    <label for="start"><g:message code="electedPosition.start.label" default="Start" /></label>
                                 </td>
-                                <td valign="top" class="value ${hasErrors(bean: positionInstance, field: 'termEnd', 'errors')}">
-                                    <g:datePicker name="termEnd" precision="day" value="${positionInstance?.termEnd}"  />
+                                <td valign="top" class="value ${hasErrors(bean: electedPositionInstance, field: 'start', 'errors')}">
+                                    <g:datePicker name="start" precision="day" value="${electedPositionInstance?.start}"  />
+                                </td>
+                            </tr>
+                        
+                            <tr class="prop">
+                                <td valign="top" class="name">
+                                    <label for="finish"><g:message code="electedPosition.finish.label" default="Finish" /></label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(bean: electedPositionInstance, field: 'finish', 'errors')}">
+                                    <g:datePicker name="finish" precision="day" value="${electedPositionInstance?.finish}"  />
+                                </td>
+                            </tr>
+                        
+                            <tr class="prop">
+                                <td valign="top" class="name">
+                                    <label for="termEnd"><g:message code="electedPosition.termEnd.label" default="Term End" /></label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(bean: electedPositionInstance, field: 'termEnd', 'errors')}">
+                                    <g:datePicker name="termEnd" precision="day" value="${electedPositionInstance?.termEnd}"  />
                                 </td>
                             </tr>
                         

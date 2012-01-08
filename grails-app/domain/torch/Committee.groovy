@@ -6,7 +6,7 @@ class Committee {
 	
 	String name
 	
-	Position chair
+	ElectedPosition chair
 	
 		
     static constraints = {

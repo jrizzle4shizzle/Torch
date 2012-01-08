@@ -1,8 +1,6 @@
 package torch
 
 class Apparatus {
-
-    static hasMany = [sitePermissions:String]
 	
 	String name
 	ApparatusType type
@@ -16,7 +14,6 @@ class Apparatus {
 		maxRiding()
 		minRiding()
 		modelAndYear()
-		sitePermissions()
     }
 	
 	String toString(){

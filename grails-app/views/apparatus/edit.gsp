@@ -78,15 +78,6 @@
                                 </td>
                             </tr>
                         
-                            <tr class="prop">
-                                <td valign="top" class="name">
-                                  <label for="sitePermissions"><g:message code="apparatus.sitePermissions.label" default="Site Permissions" /></label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean: apparatusInstance, field: 'sitePermissions', 'errors')}">
-                                    
-                                </td>
-                            </tr>
-                        
                         </tbody>
                     </table>
                 </div>

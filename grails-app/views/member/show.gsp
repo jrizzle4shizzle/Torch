@@ -106,20 +106,6 @@
                         </tr>
                     
                         <tr class="prop">
-                            <td valign="top" class="name"><g:message code="member.membershipType.label" default="Membership Type" /></td>
-                            
-                            <td valign="top" class="value"><g:link controller="membershipType" action="show" id="${memberInstance?.membershipType?.id}">${memberInstance?.membershipType?.encodeAsHTML()}</g:link></td>
-                            
-                        </tr>
-                    
-                    <tr class="prop">
-                            <td valign="top" class="name"><g:message code="member.administrativeTitle.label" default="Administrative Title" /></td>
-                            
-                            <td valign="top" class="value"><g:link controller="administrativeTitle" action="show" id="${memberInstance?.administrativeTitle?.id}">${memberInstance?.administrativeTitle?.encodeAsHTML()}</g:link></td>
-                            
-                        </tr>
-                    
-                        <tr class="prop">
                             <td valign="top" class="name"><g:message code="member.birthDay.label" default="Birth Day" /></td>
                             
                             <td valign="top" class="value">${fieldValue(bean: memberInstance, field: "birthDay")}</td>

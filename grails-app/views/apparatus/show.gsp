@@ -66,13 +66,6 @@
                             
                         </tr>
                     
-                        <tr class="prop">
-                            <td valign="top" class="name"><g:message code="apparatus.sitePermissions.label" default="Site Permissions" /></td>
-                            
-                            <td valign="top" class="value">${fieldValue(bean: apparatusInstance, field: "sitePermissions")}</td>
-                            
-                        </tr>
-                    
                     </tbody>
                 </table>
             </div>

@@ -156,28 +156,7 @@
                             </tr>
                         </g:if>
                         
-                        <g:if test="${session?.memberPermission?.editMembershipType }">
-                            <tr class="prop">
-                                <td valign="top" class="name">
-                                  <label for="membershipType"><g:message code="member.membershipType.label" default="Membership Type" /></label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean: memberInstance, field: 'membershipType', 'errors')}">
-                                    <g:select name="membershipType.id" from="${torch.MembershipType.list()}" optionKey="id" value="${memberInstance?.membershipType?.id}" noSelection="['null': '']" />
-                                </td>
-                            </tr>
-                        </g:if>
-                        
-                        <g:if test="${session?.memberPermission?.editAdministrativeTitle }">
-                        	<tr class="prop">
-                                <td valign="top" class="name">
-                                  <label for="administrativeTitle"><g:message code="member.administrativeTitle.label" default="Administrative Title" /></label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean: memberInstance, field: 'administrativeTitle', 'errors')}">
-                                    <g:select name="administrativeTitle.id" from="${torch.AdministrativeTitle.list()}" optionKey="id" value="${memberInstance?.administrativeTitle?.id}" noSelection="['null': '']" />
-                                </td>
-                            </tr>
-                        
-                        </g:if>
+                       
                         
                         <g:if test="${session?.memberPermission?.editBirthday }">
                             <tr class="prop">

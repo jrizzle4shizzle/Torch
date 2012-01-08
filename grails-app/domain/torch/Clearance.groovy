@@ -2,7 +2,6 @@ package torch
 
 class Clearance {
 
-    static hasMany = [sitePermissions:String]
 	
 	ApparatusType type
 	Boolean ride
@@ -18,7 +17,6 @@ class Clearance {
 		ride()
 		driverTraining()
 		training()
-		sitePermissions()
     }
 	
 	String toString(){

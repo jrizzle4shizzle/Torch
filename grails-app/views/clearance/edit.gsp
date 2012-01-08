@@ -80,15 +80,6 @@
                         
                             <tr class="prop">
                                 <td valign="top" class="name">
-                                  <label for="sitePermissions"><g:message code="clearance.sitePermissions.label" default="Site Permissions" /></label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean: clearanceInstance, field: 'sitePermissions', 'errors')}">
-                                    
-                                </td>
-                            </tr>
-                        
-                            <tr class="prop">
-                                <td valign="top" class="name">
                                   <label for="drive"><g:message code="clearance.drive.label" default="Drive" /></label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: clearanceInstance, field: 'drive', 'errors')}">

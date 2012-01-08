@@ -38,13 +38,6 @@
                             
                         </tr>
                     
-                        <tr class="prop">
-                            <td valign="top" class="name"><g:message code="eventType.sitePermissions.label" default="Site Permissions" /></td>
-                            
-                            <td valign="top" class="value">${fieldValue(bean: eventTypeInstance, field: "sitePermissions")}</td>
-                            
-                        </tr>
-                    
                     </tbody>
                 </table>
             </div>
