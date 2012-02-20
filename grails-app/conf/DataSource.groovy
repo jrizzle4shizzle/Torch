@@ -25,8 +25,11 @@ environments {
     }
     production {
         dataSource {
-            dbCreate = "update"
-            url = "jdbc:hsqldb:file:prodDb;shutdown=true"
-        }
+	        dbCreate = "update"
+	        driverClassName = "com.myorg.jdbcDriverNotExists"
+	        url = ""
+	        username = ""
+	        password = ""
+	    }
     }
 }
