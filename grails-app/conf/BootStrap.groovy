@@ -52,6 +52,16 @@ class BootStrap {
 			break
 			
 			case "production":
+				//def admin = new Member()
+				//admin.setLogin("admin")
+				//String adminPass = "sUp3rS3cr3t!"
+				//admin.setPassword(adminPass.encodeAsHash())
+				//admin.setFirstName("Admin")
+				//admin.setLastName("istrator")
+				//admin.setRole("admin")
+				//admin.setActive(true)
+				
+				//admin.save()
 			break
 			
 			default:
