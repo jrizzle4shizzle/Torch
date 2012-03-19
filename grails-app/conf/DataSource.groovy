@@ -23,6 +23,8 @@ environments {
             url = "jdbc:hsqldb:mem:testDb"
         }
     }
+	
+	//override in app-config.properties
     production {
         dataSource {
 	        dbCreate = "update"

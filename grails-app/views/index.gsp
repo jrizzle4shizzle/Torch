@@ -65,8 +65,15 @@
                     <g:if test="${session?.user?.role == 'admin'}">
                     	<h1>Admin Menu</h1>
                     	<ul>
-                    		<li><a href="administrativeTitle">Administrative Titles</a></li>
+                    		<li><a href="apparatus">Apparatus</a></li>
+                    		<li><a href="apparatusType">Apparatus Types</a></li>
+                    		<li><a href="eventType">Event Types</a></li>
+                    		<li><a href="clearance">Clearance</a></li>
+                    		<li><a href="certification">Certification</a></li>
+                    		<li><a href="certificationType">Certification Types</a></li>
+                    		<li><a href="electedPosition">Elected Position</a></li>
                     		<li><a href="membershipType">Membership Types</a></li>
+                    		<li><a href="positionType">Position Types</a></li>
                     		<li><a href="rank">Ranks</a></li>
                     		
                     	</ul>
